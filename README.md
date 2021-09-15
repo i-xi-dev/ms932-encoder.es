@@ -1,6 +1,6 @@
 # @i-xi-dev/ms932-encoder
 
-A JavaScript Windows-31J encoder, implements Shift_JIS decoder defined in WHATWG Encoding Standard.
+A JavaScript Windows-31J encoder, implements [Shift_JIS encoder](https://encoding.spec.whatwg.org/#shift_jis-encoder) defined in WHATWG Encoding Standard.
 
 
 ## Installation
