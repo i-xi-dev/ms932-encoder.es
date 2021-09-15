@@ -1,0 +1,1 @@
+# ms932-encoder.es
