@@ -1,6 +1,6 @@
 {
   "name": "@i-xi-dev/ms932-encoder",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A JavaScript Windows-31J encoder, implements Shift_JIS decoder defined in WHATWG Encoding Standard.",
   "type": "module",
   "main": "./dist/index.js",

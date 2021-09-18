@@ -13,14 +13,15 @@ class Ms932Encoder {// implements TextEncoder {
   }
 
   get encoding(): string {
-    return "Windows-31J";
+    return "windows-31j";
   }
 
   encode(input = ""): Uint8Array {
     const tmp = new Array(input.length * 2);
     let i = 0;
     for (const c of input) {
-      const bytes = charToBytes(c, this.#fatal);
+      const codePoint = c.codePointAt(0) as number;
+      const bytes = encodeChar(codePoint, this.#fatal);
       tmp[i] = bytes[0];
       i = i + 1;
       if (bytes.length > 1) {
@@ -28,27 +29,46 @@ class Ms932Encoder {// implements TextEncoder {
         i = i + 1;
       }
     }
-  
+
     return Uint8Array.from(tmp.slice(0, i));
   }
 
-  // TODO
-  // encodeInto(source: string, destination: Uint8Array): TextEncoderEncodeIntoResult {
-  // }
+  // XXX ブラウザのTextEncoder#encodeIntoだと、sourceは多分toString()している
+  //     （string型以外のいかなる型でもあっても多分落ちない）
+  encodeInto(source: string, destination: Uint8Array): TextEncoderEncodeIntoResult {
+    let read = 0;
+    let written = 0;
+    for (const c of source) {
+      const codePoint = c.codePointAt(0) as number;
+      const bytes = encodeChar(codePoint, this.#fatal);
+
+      if ((written + bytes.length) > destination.length) {
+        break;
+      }
+
+      read = read + (codePoint <= 0xFFFF ? 1 : 2);
+      destination.set(bytes, written);
+      written = written + bytes.length;
+    }
+
+    return {
+      read,
+      written,
+    };
+  }
 }
 Object.freeze(Ms932Encoder);
 
 /**
- * 1文字をバイト列に変換
+ * 1文字をShift_JISのバイト列に変換
  * 
  * {@link https://encoding.spec.whatwg.org/#shift_jis-encoder Shift_JIS encoder}の仕様に従った。
  * 
- * @param char 1文字
+ * @param codePoint Unicode符号位置
  * @param exceptionFallback 符号化失敗時に例外を投げるか否か
- * @returns バイト列
+ * @returns Shift_JISのバイト列
  */
-function charToBytes(char: string, exceptionFallback: boolean): [ number ] | [ number, number ] {
-  let codePoint = char.codePointAt(0) as number;
+function encodeChar(codePoint: number, exceptionFallback: boolean): [ number ] | [ number, number ] {
   if (codePoint <= 0x80) {
     // 2.
     return [ codePoint ];
@@ -79,7 +99,7 @@ function charToBytes(char: string, exceptionFallback: boolean): [ number ] | [ n
     if (exceptionFallback === true) {
       throw new Error(`EncodingError U+${ codePoint.toString(16).toUpperCase().padStart(4, "0") }`);
     }
-    return [ 0x3F ];
+    return [ 0x3F ]; // U+FFFDはShift_JISで表現できない為、U+003Fとする //TODO オプション指定可能にする
   }
 
   // 9.
