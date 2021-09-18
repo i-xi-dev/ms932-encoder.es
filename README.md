@@ -28,6 +28,12 @@ const encoder = new Ms932Encoder();
 
 encoder.encode("あいうえお");
 // → Uint8Array[ 0x82, 0xA0, 0x82, 0xA2, 0x82, 0xA4, 0x82, 0xA6, 0x82, 0xA8 ]
+
+const bytes = new Uint8Array(10);
+const { read, written } = encoder.encodeInto("あいうえお", bytes);
+// → read: 5
+//   written: 10
+//   bytes: Uint8Array[ 0x82, 0xA0, 0x82, 0xA2, 0x82, 0xA4, 0x82, 0xA6, 0x82, 0xA8 ]
 ```
 
 ### Encoding error handling

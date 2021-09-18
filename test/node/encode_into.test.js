@@ -29,6 +29,15 @@ describe("Ms932Encoder.encodeInto", () => {
 
   it("encodeInto(string)", () => {
     const ms932Encoder = new Ms932Encoder();
+    const td = new TextDecoder("shift_jis");
+
+    const b1 = new Uint8Array(10);
+    const r1 = ms932Encoder.encodeInto("あいうえお", b1);
+    assert.strictEqual([...b1].join(","), "130,160,130,162,130,164,130,166,130,168");
+    assert.strictEqual(r1.read, 5);
+    assert.strictEqual(r1.written, 10);
+
+    assert.strictEqual(td.decode(b1.subarray(0,r1.written)), "あいうえお");
 
     const b2 = new Uint8Array(20);
     const r2 = ms932Encoder.encodeInto("あabcいうえお\u{29e3d}123?", b2);
@@ -36,7 +45,6 @@ describe("Ms932Encoder.encodeInto", () => {
     assert.strictEqual(r2.read, 14);
     assert.strictEqual(r2.written, 18);
 
-    const td = new TextDecoder("shift_jis");
     assert.strictEqual(td.decode(b2.subarray(0,r2.written)), "あabcいうえお?123?");
 
   });
