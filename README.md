@@ -63,15 +63,13 @@ The `Ms932EncoderStream` implements TextEncoderStream interface.
 
 
 ### Requirement
-This requires TransformStream.
+`Ms932EncoderStream` requires TransformStream.
 
-#### Browser
 - Chrome
 - Edge
 - Safari 14.1+
-
-#### Node.js
-16.5.0+
+- Deno
+- Node.js 16.5.0+
 
 
 ### Installation
