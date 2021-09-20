@@ -1,20 +1,20 @@
 //
 
-/**
- * The labels of MS932 encoding.
- * 
- * {@link https://encoding.spec.whatwg.org/#names-and-labels}
- */
-const MS932_LABELS: ReadonlyArray<string> = [
-  "csshiftjis",
-  "ms932",
-  "ms_kanji",
-  "shift-jis",
-  "shift_jis",
-  "sjis",
-  "windows-31j",
-  "x-sjis",
-];
+// /**
+//  * The labels of MS932 encoding.
+//  * 
+//  * {@link https://encoding.spec.whatwg.org/#names-and-labels}
+//  */
+// const MS932_LABELS: ReadonlyArray<string> = [
+//   "csshiftjis",
+//   "ms932",
+//   "ms_kanji",
+//   "shift-jis",
+//   "shift_jis",
+//   "sjis",
+//   "windows-31j",
+//   "x-sjis",
+// ];
 
 /**
  * The error mode for Ms932EncoderCommon.
@@ -36,16 +36,16 @@ class Ms932EncoderCommon {
   readonly #errorMode: Ms932ErrorMode;
 
   /**
-   * @param label The label of MS932 encoding.
-   * @param errorMode The error mode.
+   * @param options The error mode.
    */
-  constructor(label: string, errorMode: Ms932ErrorMode) {
-    if (MS932_LABELS.includes(label.toLowerCase()) !== true) {
-      throw new RangeError(`The given label "${ label }" is invalid.`);
+  constructor(options?: Ms932EncoderOptions) {
+    let fatal = false;
+    if (options) {
+      fatal = options.fatal === true;
     }
 
     this.#name = "Shift_JIS";
-    this.#errorMode = errorMode;
+    this.#errorMode = fatal ? "fatal" : "replacement";
     Object.freeze(this);
   }
 
@@ -7869,6 +7869,7 @@ const TABLE = new Map<number, number>([
 
 export {
   encodeChar,
+  // MS932_LABELS,
   Ms932EncoderCommon,
   Ms932EncoderOptions,
 };
