@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { Ms932EncoderStream } from "../../../node.mjs";
+import { Ms932EncoderStream } from "../../../node/stream/index.mjs";
 
 describe("Ms932EncoderStream.prototype.fatal", () => {
   it("fatal", () => {

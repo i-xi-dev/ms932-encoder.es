@@ -1,14 +1,18 @@
 {
   "name": "@i-xi-dev/ms932-encoder",
-  "version": "1.1.1",
-  "description": "A JavaScript Windows-31J encoder, implements Shift_JIS decoder defined in WHATWG Encoding Standard.",
+  "version": "1.2.0",
+  "description": "A JavaScript Windows-31J encoder, implements Shift_JIS encoder defined in WHATWG Encoding Standard.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "node": "./node.mjs",
+      "node": "./node/index.mjs",
       "default": "./dist/index.js"
+    },
+    "./stream": {
+      "node": "./node/stream/index.mjs",
+      "default": "./dist/stream/index.js"
     }
   },
   "scripts": {
@@ -27,6 +31,7 @@
     "shift_jis",
     "windows-31j",
     "textencoder",
+    "textencoderstream",
     "browser",
     "deno",
     "nodejs"
@@ -39,7 +44,7 @@
   "homepage": "https://github.com/i-xi-dev/ms932-encoder.es#readme",
   "files": [
     "dist",
-    "node.mjs"
+    "node"
   ],
   "engines": {
     "node": ">=16.5.0"

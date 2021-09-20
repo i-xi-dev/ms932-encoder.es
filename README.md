@@ -3,9 +3,14 @@
 A JavaScript Windows-31J encoder, implements [Shift_JIS encoder](https://encoding.spec.whatwg.org/#shift_jis-encoder) defined in WHATWG Encoding Standard.
 
 
-## Installation
+## Ms932Encoder class
 
-### npm
+The `Ms932Encoder` implements the TextEncoder interface.
+
+
+### Installation
+
+#### npm
 
 ```console
 $ npm i @i-xi-dev/ms932-encoder
@@ -15,14 +20,14 @@ $ npm i @i-xi-dev/ms932-encoder
 import { Ms932Encoder } from "@i-xi-dev/ms932-encoder";
 ```
 
-### CDN
+#### CDN
 
 ```javascript
 import { Ms932Encoder } from "https://unpkg.com/@i-xi-dev/ms932-encoder";
 ```
 
 
-## Usage
+### Usage
 ```javascript
 const encoder = new Ms932Encoder();
 
@@ -36,7 +41,7 @@ const { read, written } = encoder.encodeInto("あいうえお", bytes);
 //   bytes: Uint8Array[ 0x82, 0xA0, 0x82, 0xA2, 0x82, 0xA4, 0x82, 0xA6, 0x82, 0xA8 ]
 ```
 
-### Encoding error handling
+#### Encoding error handling
 ```javascript
 const encoder = new Ms932Encoder({ fatal: false }); // default
 
@@ -51,3 +56,46 @@ encoder.encode("𩸽");
 // → throws Error.
 ```
 
+
+## Ms932EncoderStream class
+
+The `Ms932EncoderStream` implements TextEncoderStream interface.
+
+
+### Requirement
+This requires TransformStream.
+
+#### Browser
+- Chrome
+- Edge
+- Safari 14.1+
+
+#### Node.js
+16.5.0+
+
+
+### Installation
+
+#### npm
+
+```console
+$ npm i @i-xi-dev/ms932-encoder/stream
+```
+
+```javascript
+import { Ms932EncoderStream } from "@i-xi-dev/ms932-encoder/stream";
+```
+
+#### CDN
+
+```javascript
+import { Ms932EncoderStream } from "https://unpkg.com/@i-xi-dev/ms932-encoder/stream";
+```
+
+
+### Usage
+```javascript
+const encoderStream = new Ms932EncoderStream();
+
+readableStream.pipeThrough(encoderStream).pipeTo(writableStream);
+```
