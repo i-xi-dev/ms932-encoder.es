@@ -77,7 +77,7 @@ The `Ms932EncoderStream` implements TextEncoderStream interface.
 #### npm
 
 ```console
-$ npm i @i-xi-dev/ms932-encoder/stream
+$ npm i @i-xi-dev/ms932-encoder
 ```
 
 ```javascript
@@ -87,7 +87,7 @@ import { Ms932EncoderStream } from "@i-xi-dev/ms932-encoder/stream";
 #### CDN
 
 ```javascript
-import { Ms932EncoderStream } from "https://unpkg.com/@i-xi-dev/ms932-encoder/stream";
+import { Ms932EncoderStream } from "https://unpkg.com/@i-xi-dev/ms932-encoder/dist/stream/index.js";
 ```
 
 
