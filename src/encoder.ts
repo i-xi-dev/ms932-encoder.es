@@ -2,7 +2,9 @@
 
 import { encodeChar, Ms932EncoderCommon, Ms932EncoderOptions } from "./_.js";
 
-class Ms932Encoder extends Ms932EncoderCommon implements TextEncoder {
+class Ms932Encoder implements TextEncoder {
+  readonly #common: Ms932EncoderCommon;
+
   /**
    * @param options Options for Ms932Encoder.
    */
@@ -26,8 +28,22 @@ class Ms932Encoder extends Ms932EncoderCommon implements TextEncoder {
     else if (param0) {
       fatal = param0.fatal === true;
     }
-    super(label, (fatal ? "fatal" : "replacement"));
+    this.#common = new Ms932EncoderCommon(label, (fatal ? "fatal" : "replacement"));
     Object.freeze(this);
+  }
+
+  /**
+   * Gets "shift_jis".
+   */
+  get encoding(): string {
+    return this.#common.encoding;
+  }
+
+  /**
+   * Gets true if the error mode is "fatal", otherwise false.
+   */
+  get fatal(): boolean {
+    return this.#common.fatal;
   }
 
   encode(input = ""): Uint8Array {

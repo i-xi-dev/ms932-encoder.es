@@ -46,6 +46,7 @@ class Ms932EncoderCommon {
 
     this.#name = "Shift_JIS";
     this.#errorMode = errorMode;
+    Object.freeze(this);
   }
 
   /**
