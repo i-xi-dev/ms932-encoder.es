@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>test</title>
+    <script type="module">
+import test from "../test.mjs";
+import { Ms932Encoder } from "../../../dist/index.js";
+
+test.it("fatal", () => {
+  const ms932Encoder1 = new Ms932Encoder({fatal:true});
+  test.assert.strictEqual(ms932Encoder1.fatal, true);
+
+  const ms932Encoder2 = new Ms932Encoder({fatal:false});
+  test.assert.strictEqual(ms932Encoder2.fatal, false);
+
+  const ms932Encoder3 = new Ms932Encoder();
+  test.assert.strictEqual(ms932Encoder3.fatal, false);
+});
+
+test.exec();
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
