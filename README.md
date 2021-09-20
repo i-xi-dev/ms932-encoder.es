@@ -23,7 +23,7 @@ import { Ms932Encoder } from "@i-xi-dev/ms932-encoder";
 #### CDN
 
 ```javascript
-import { Ms932Encoder } from "https://unpkg.com/@i-xi-dev/ms932-encoder";
+import { Ms932Encoder } from "https://unpkg.com/@i-xi-dev/ms932-encoder/dist/index.js";
 ```
 
 
