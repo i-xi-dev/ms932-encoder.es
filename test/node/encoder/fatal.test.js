@@ -1,7 +1,7 @@
 import assert from "node:assert";
 import { Ms932Encoder } from "../../../node.mjs";
 
-describe("Ms932Encoder.fatal", () => {
+describe("Ms932Encoder.prototype.fatal", () => {
   it("fatal", () => {
     const ms932Encoder1 = new Ms932Encoder({fatal:true});
     assert.strictEqual(ms932Encoder1.fatal, true);

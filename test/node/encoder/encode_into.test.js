@@ -1,7 +1,7 @@
 import assert from "node:assert";
 import { Ms932Encoder } from "../../../node.mjs";
 
-describe("Ms932Encoder.encodeInto", () => {
+describe("Ms932Encoder.prototype.encodeInto", () => {
   it("encodeInto(string, Object)", () => {
     // fallback
     const ms932Encoder1 = new Ms932Encoder({fatal:true});
