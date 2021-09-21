@@ -43,6 +43,8 @@ class Ms932EncoderStream implements TextEncoderStream {
 
   /**
    * Gets "shift_jis".
+   * 
+   * @see {@link TextEncoderCommon.encoding}
    */
   get encoding(): string {
     return this.#common.encoding;
@@ -56,15 +58,29 @@ class Ms932EncoderStream implements TextEncoderStream {
   }
 
   // $011
+  /**
+   * @see {@link TransformStream.writable}
+   */
   get writable(): WritableStream<string> {
     return this.#stream.writable;
   }
 
   // $011
+  /**
+   * @see {@link TransformStream.readable}
+   */
   get readable(): ReadableStream<Uint8Array> {
     return this.#stream.readable;
   }
 
+  /**
+   * チャンクを符号化
+   * 
+   * https://encoding.spec.whatwg.org/#interface-textencoderstream のとおりの処理ではないが、結果は同じはず
+   * 
+   * @param chunk 文字列
+   * @returns chunkを符号化したバイト列
+   */
   #encodeChunk(chunk: string): Uint8Array {
     const cs = [ ...(this.#pending.highSurrogate + chunk) ];
     this.#pending.highSurrogate = "";

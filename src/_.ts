@@ -24,7 +24,7 @@ type Ms932ErrorMode = "fatal" | "replacement";
 /**
  * Common getters that are shared between Ms932Encoder and Ms932EncoderStream.
  */
-class Ms932EncoderCommon {
+class Ms932EncoderCommon implements TextEncoderCommon {
   /**
    * A name for this instance.
    */
