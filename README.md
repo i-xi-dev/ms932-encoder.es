@@ -26,6 +26,10 @@ import { Ms932Encoder } from "@i-xi-dev/ms932-encoder";
 import { Ms932Encoder } from "https://unpkg.com/@i-xi-dev/ms932-encoder/dist/index.js";
 ```
 
+```javascript
+import { Ms932Encoder } from "https://cdn.jsdelivr.net/npm/@i-xi-dev/ms932-encoder/dist/index.js";
+```
+
 
 ### Usage
 ```javascript
@@ -88,6 +92,10 @@ import { Ms932EncoderStream } from "@i-xi-dev/ms932-encoder/stream";
 
 ```javascript
 import { Ms932EncoderStream } from "https://unpkg.com/@i-xi-dev/ms932-encoder/dist/stream/index.js";
+```
+
+```javascript
+import { Ms932EncoderStream } from "https://cdn.jsdelivr.net/npm/@i-xi-dev/ms932-encoder/dist/stream/index.js";
 ```
 
 
