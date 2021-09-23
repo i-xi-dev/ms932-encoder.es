@@ -23,6 +23,10 @@ import { Ms932Encoder } from "@i-xi-dev/ms932-encoder";
 #### CDN
 
 ```javascript
+import { Ms932Encoder } from "https://cdn.skypack.dev/@i-xi-dev/ms932-encoder";
+```
+
+```javascript
 import { Ms932Encoder } from "https://unpkg.com/@i-xi-dev/ms932-encoder/dist/index.js";
 ```
 
@@ -89,6 +93,10 @@ import { Ms932EncoderStream } from "@i-xi-dev/ms932-encoder/stream";
 ```
 
 #### CDN
+
+```javascript
+import { Ms932EncoderStream } from "https://cdn.skypack.dev/@i-xi-dev/ms932-encoder/stream";
+```
 
 ```javascript
 import { Ms932EncoderStream } from "https://unpkg.com/@i-xi-dev/ms932-encoder/dist/stream/index.js";
