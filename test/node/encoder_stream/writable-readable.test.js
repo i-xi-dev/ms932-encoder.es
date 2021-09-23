@@ -10,12 +10,18 @@ describe("Ms932EncoderStream.prototype.writable", () => {
       "\uD867",
       "",
       "A",
+
       "\uD867\uDE3E",
       "A",
       "\uDE3E",
       "A",
-      "",
-      "",
+      "AA",
+
+      "\uD867",
+      "\uDE3E",
+      "A",
+      "\u0000",
+      "A",
     ]
 
     let ti;
@@ -23,7 +29,7 @@ describe("Ms932EncoderStream.prototype.writable", () => {
       start(controller) {
         let c = 0;
         ti = setInterval(() => {
-          if (c >= 10) {
+          if (c >= 15) {
             clearInterval(ti);
             controller.close();
             return;
@@ -37,7 +43,7 @@ describe("Ms932EncoderStream.prototype.writable", () => {
 
     const ms932Encoder1 = new Ms932EncoderStream();
 
-    const result = new Uint8Array(15);
+    const result = new Uint8Array(20);
     let written = 0;
     const ws = new WritableStream({
       write(chunk) {
@@ -50,7 +56,8 @@ describe("Ms932EncoderStream.prototype.writable", () => {
 
     const expected = "0x41,0x42,0x43,0x82,0xA0,"
       + "0x3F,0x41,0x3F,0x41,0x3F,"
-      + "0x41,0x00,0x00,0x00,0x00";
+      + "0x41,0x41,0x41,0x3F,0x41,"
+      + "0x00,0x41,0x00,0x00,0x00";
 
     assert.strictEqual([...result].map(e => "0x" + e.toString(16).toUpperCase().padStart(2, "0")).join(","), expected);
 

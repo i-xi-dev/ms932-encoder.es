@@ -75,9 +75,10 @@ type Ms932EncoderOptions = {
 };
 
 /**
- * 1文字をShift_JISのバイト列に変換
+ * 1文字をWindows-31Jのバイト列に変換
  * 
  * {@link https://encoding.spec.whatwg.org/#shift_jis-encoder Shift_JIS encoder}の仕様に従った。
+ * （注: 上記仕様において"Shift_JIS"はWindows-31Jから私用領域を除いたものを指す）
  * 
  * @param codePoint Unicode code point.
  * @param exceptionFallback 符号化失敗時に例外を投げるか否か
@@ -114,7 +115,7 @@ function encodeChar(codePoint: number, exceptionFallback: boolean): [ number ] |
     if (exceptionFallback === true) {
       throw new Error(`EncodingError U+${ codePoint.toString(16).toUpperCase().padStart(4, "0") }`); // TODO TypeError?
     }
-    return [ 0x3F ]; // U+FFFDはShift_JISで表現できない為、U+003Fとする //TODO オプション指定可能にする
+    return [ 0x3F ]; // U+FFFDはWindows-31Jで表現できない為、U+003Fとする //TODO オプション指定可能にする
   }
 
   // 9.

@@ -1,1 +1,1 @@
-export { Ms932Encoder } from "../dist/encoder.js";
+export { Ms932Encoder } from "../dist/index.js";
