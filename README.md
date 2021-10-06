@@ -5,7 +5,7 @@ A JavaScript Windows-31J encoder, implements [Shift_JIS encoder](https://encodin
 
 ## Ms932Encoder class
 
-The `Ms932Encoder` implements the TextEncoder interface.
+The `Ms932Encoder` implements the [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder) interface.
 
 
 ### Installation
@@ -67,11 +67,11 @@ encoder.encode("𩸽");
 
 ## Ms932EncoderStream class
 
-The `Ms932EncoderStream` implements TextEncoderStream interface.
+The `Ms932EncoderStream` implements [`TextEncoderStream`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream) interface.
 
 
 ### Requirement
-`Ms932EncoderStream` requires TransformStream.
+`Ms932EncoderStream` requires [`TransformStream`](https://developer.mozilla.org/en-US/docs/Web/API/TransformStream).
 
 - Chrome
 - Edge
