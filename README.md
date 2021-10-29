@@ -3,7 +3,7 @@
 A JavaScript Windows-31J encoder, implements [Shift_JIS encoder](https://encoding.spec.whatwg.org/#shift_jis-encoder) defined in WHATWG Encoding Standard.
 
 
-## Ms932Encoder class
+## `Ms932Encoder` class
 
 The `Ms932Encoder` implements the [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder) interface.
 
@@ -65,7 +65,7 @@ encoder.encode("𩸽");
 ```
 
 
-## Ms932EncoderStream class
+## `Ms932EncoderStream` class
 
 The `Ms932EncoderStream` implements [`TextEncoderStream`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream) interface.
 
