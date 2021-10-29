@@ -36,6 +36,7 @@ import { Ms932Encoder } from "https://cdn.jsdelivr.net/npm/@i-xi-dev/ms932-encod
 
 
 ### Usage
+
 ```javascript
 const encoder = new Ms932Encoder();
 

@@ -39,13 +39,8 @@ class Ms932EncoderCommon implements TextEncoderCommon {
    * @param options The error mode.
    */
   constructor(options?: Ms932EncoderOptions) {
-    let fatal = false;
-    if (options) {
-      fatal = options.fatal === true;
-    }
-
     this.#name = "Shift_JIS";
-    this.#errorMode = fatal ? "fatal" : "replacement";
+    this.#errorMode = (options?.fatal === true) ? "fatal" : "replacement";
     Object.freeze(this);
   }
 
