@@ -71,6 +71,7 @@ encoder.encode("𩸽");
 ### FAQ
 
 **Q:** Where is Ms932Decoder?
+
 **A:** Browsers and Node.js implement the [Shift_JIS decoder](https://encoding.spec.whatwg.org/#shift_jis-decoder).
 Use a [`TextDecoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder).
 ```javascript
