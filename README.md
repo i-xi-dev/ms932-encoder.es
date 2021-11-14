@@ -2,6 +2,8 @@
 
 A JavaScript Windows-31J encoder, implements [Shift_JIS encoder](https://encoding.spec.whatwg.org/#shift_jis-encoder) defined in WHATWG Encoding Standard.
 
+- [`Ms932Encoder`](#ms932encoder-class)
+- [`Ms932EncoderStream`](#ms932encoderstream-class)
 
 ## `Ms932Encoder` class
 
@@ -63,6 +65,16 @@ const encoder = new Ms932Encoder({ fatal: true });
 
 encoder.encode("𩸽");
 // → throws Error.
+```
+
+
+### FAQ
+
+**Q:** Where is Ms932Decoder?
+**A:** Browsers and Node.js implement the [Shift_JIS decoder](https://encoding.spec.whatwg.org/#shift_jis-decoder).
+Use a [`TextDecoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder).
+```javascript
+const decoder = new TextDecoder("shift_jis");
 ```
 
 
