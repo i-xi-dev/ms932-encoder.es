@@ -1,6 +1,6 @@
 {
   "name": "@i-xi-dev/ms932-encoder",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A JavaScript Windows-31J encoder, implements Shift_JIS encoder defined in WHATWG Encoding Standard.",
   "type": "module",
   "main": "./dist/index.js",
@@ -50,8 +50,8 @@
     "node": ">=16.5.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.3.1",
-    "@typescript-eslint/parser": "^5.3.1",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^8.2.0",
     "mocha": "^9.1.3",
     "typescript": "^4.4.4"
