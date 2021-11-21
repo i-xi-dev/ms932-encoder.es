@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { ReadableStream, TransformStream, WritableStream } from "node:stream/web";
+import { ReadableStream, WritableStream } from "node:stream/web";
 import { Ms932EncoderStream } from "../../../node/stream/index.mjs";
 
 describe("Ms932EncoderStream.prototype.writable", () => {
@@ -40,6 +40,14 @@ describe("Ms932EncoderStream.prototype.writable", () => {
         }, 10);
       },
     });
+
+    await (() => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 200);
+      });
+    })();
 
     const ms932Encoder1 = new Ms932EncoderStream();
 

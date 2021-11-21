@@ -5,6 +5,7 @@ A JavaScript Windows-31J encoder, implements [Shift_JIS encoder](https://encodin
 - [`Ms932Encoder`](#ms932encoder-class)
 - [`Ms932EncoderStream`](#ms932encoderstream-class)
 
+
 ## `Ms932Encoder` class
 
 The `Ms932Encoder` implements the [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder) interface.
@@ -122,8 +123,11 @@ import { Ms932EncoderStream } from "https://cdn.jsdelivr.net/npm/@i-xi-dev/ms932
 
 
 ### Usage
+
 ```javascript
 const encoderStream = new Ms932EncoderStream();
 
+// readableStream: ReadableStream<string>
+// writableStream: WritableStream<Uint8Array>
 readableStream.pipeThrough(encoderStream).pipeTo(writableStream);
 ```
