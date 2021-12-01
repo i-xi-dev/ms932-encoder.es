@@ -1,6 +1,6 @@
 //
 
-import { encodeChar, Ms932EncoderCommon, Ms932EncoderOptions } from "../_.js";
+import { encodeChar, Ms932EncoderCommon, Ms932EncoderOptions } from "../_";
 
 type Ms932EncoderStreamPending = {
   highSurrogate: string,

@@ -1,5 +1,7 @@
 //
 
+import { uint8 } from "@i-xi-dev/fundamental";
+
 // /**
 //  * The labels of MS932 encoding.
 //  * 
@@ -79,10 +81,10 @@ type Ms932EncoderOptions = {
  * @param exceptionFallback 符号化失敗時に例外を投げるか否か
  * @returns MS932 encoded byte array.
  */
-function encodeChar(codePoint: number, exceptionFallback: boolean): [ number ] | [ number, number ] {
+function encodeChar(codePoint: number, exceptionFallback: boolean): [ uint8 ] | [ uint8, uint8 ] {
   if (codePoint <= 0x80) {
     // 2.
-    return [ codePoint ];
+    return [ (codePoint as uint8) ];
   }
   else if (codePoint === 0xA5) {
     // 3.
@@ -94,7 +96,7 @@ function encodeChar(codePoint: number, exceptionFallback: boolean): [ number ] |
   }
   else if (codePoint >= 0xFF61 && codePoint <= 0xFF9F) {
     // 5.
-    return [ codePoint - 0xFF61 + 0xA1 ];
+    return [ (codePoint - 0xFF61 + 0xA1) as uint8 ];
   }
 
   // 6.
@@ -126,7 +128,7 @@ function encodeChar(codePoint: number, exceptionFallback: boolean): [ number ] |
   const offset = (tail < 0x3F) ? 0x40 : 0x41;
 
   // 13.
-  return [ (lead + leadOffset), (tail + offset) ];
+  return [ (lead + leadOffset) as uint8, (tail + offset) as uint8 ];
 }
 
 /**

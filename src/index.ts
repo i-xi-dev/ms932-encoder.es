@@ -1,6 +1,7 @@
 //
 
-import { encodeChar, Ms932EncoderCommon, Ms932EncoderOptions } from "./_.js";
+import { uint8 } from "@i-xi-dev/fundamental";
+import { encodeChar, Ms932EncoderCommon, Ms932EncoderOptions } from "./_";
 
 /**
  * Windows-31J text encoder
@@ -37,7 +38,7 @@ class Ms932Encoder implements TextEncoder {
    * Implements {@link TextEncoder.encode}.
    */
   encode(input = ""): Uint8Array {
-    const tmp = new Array(input.length * 2);
+    const tmp = new Array<uint8>(input.length * 2);
     let written = 0;
     for (const c of input) {
       const codePoint = c.codePointAt(0) as number;
@@ -45,7 +46,7 @@ class Ms932Encoder implements TextEncoder {
       tmp[written] = bytes[0];
       written = written + 1;
       if (bytes.length > 1) {
-        tmp[written] = bytes[1];
+        tmp[written] = bytes[1] as uint8;
         written = written + 1;
       }
     }
