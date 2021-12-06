@@ -74,7 +74,7 @@ type Ms932EncoderOptions = {
 /**
  * 1文字をWindows-31Jのバイト列に変換
  * 
- * {@link https://encoding.spec.whatwg.org/#shift_jis-encoder Shift_JIS encoder}の仕様に従った。
+ * {@link [Shift_JIS encoder](https://encoding.spec.whatwg.org/#shift_jis-encoder)}の仕様に従った。
  * （注: 上記仕様において"Shift_JIS"はWindows-31Jから私用領域を除いたものを指す）
  * 
  * @param codePoint Unicode code point.
@@ -134,7 +134,7 @@ function encodeChar(codePoint: number, exceptionFallback: boolean): [ uint8 ] | 
 /**
  * JIS 0208 index
  * 
- * {@link https://encoding.spec.whatwg.org/index-jis0208.txt index-jis0208.txt}を加工
+ * {@link [index-jis0208.txt](https://encoding.spec.whatwg.org/index-jis0208.txt)}を加工
  */
 const TABLE = new Map<number, number>([
   [ 0x3000, 0 ],
