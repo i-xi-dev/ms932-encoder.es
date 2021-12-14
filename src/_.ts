@@ -1,6 +1,8 @@
 //
 
-import { uint8 } from "@i-xi-dev/fundamental";
+import {
+  type uint8,
+} from "@i-xi-dev/fundamental";
 
 // /**
 //  * The labels of MS932 encoding.
@@ -77,8 +79,8 @@ type Ms932EncoderOptions = {
  * {@link [Shift_JIS encoder](https://encoding.spec.whatwg.org/#shift_jis-encoder)}の仕様に従った。
  * （注: 上記仕様において"Shift_JIS"はWindows-31Jから私用領域を除いたものを指す）
  * 
- * @param codePoint Unicode code point.
- * @param exceptionFallback 符号化失敗時に例外を投げるか否か
+ * @param codePoint - Unicode code point.
+ * @param exceptionFallback - 符号化失敗時に例外を投げるか否か
  * @returns MS932 encoded byte array.
  */
 function encodeChar(codePoint: number, exceptionFallback: boolean): [ uint8 ] | [ uint8, uint8 ] {
@@ -7866,8 +7868,8 @@ const TABLE = new Map<number, number>([
 ]);
 
 export {
+  type Ms932EncoderOptions,
   encodeChar,
   // MS932_LABELS,
   Ms932EncoderCommon,
-  Ms932EncoderOptions,
 };

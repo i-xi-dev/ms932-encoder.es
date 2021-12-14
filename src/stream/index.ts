@@ -1,6 +1,10 @@
 //
 
-import { encodeChar, Ms932EncoderCommon, Ms932EncoderOptions } from "../_";
+import {
+  type Ms932EncoderOptions,
+  encodeChar,
+  Ms932EncoderCommon,
+} from "../_";
 
 type Ms932EncoderStreamPending = {
   highSurrogate: string,
@@ -18,7 +22,7 @@ class Ms932EncoderStream implements TextEncoderStream {
   readonly #stream: TransformStream<string, Uint8Array>;
 
   /**
-   * @param options Options for Ms932EncoderStream.
+   * @param options - Options for Ms932EncoderStream.
    */
   constructor(options?: Ms932EncoderOptions) {
     const self = (): Ms932EncoderStream => this;
@@ -80,7 +84,7 @@ class Ms932EncoderStream implements TextEncoderStream {
    * 
    * https://encoding.spec.whatwg.org/#interface-textencoderstream のとおりの処理ではないが、結果は同じはず
    * 
-   * @param chunk 文字列
+   * @param chunk - 文字列
    * @returns chunkを符号化したバイト列
    */
   #encodeChunk(chunk: string): Uint8Array {

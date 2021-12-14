@@ -1,7 +1,13 @@
 //
 
-import { uint8 } from "@i-xi-dev/fundamental";
-import { encodeChar, Ms932EncoderCommon, Ms932EncoderOptions } from "./_";
+import {
+  type uint8,
+} from "@i-xi-dev/fundamental";
+import {
+  type Ms932EncoderOptions,
+  encodeChar,
+  Ms932EncoderCommon,
+} from "./_";
 
 /**
  * Windows-31J text encoder
@@ -13,7 +19,7 @@ class Ms932Encoder implements TextEncoder {
   readonly #common: Ms932EncoderCommon;
 
   /**
-   * @param options Options for Ms932Encoder.
+   * @param options - Options for Ms932Encoder.
    */
   constructor(options?: Ms932EncoderOptions) {
     this.#common = new Ms932EncoderCommon(options);
