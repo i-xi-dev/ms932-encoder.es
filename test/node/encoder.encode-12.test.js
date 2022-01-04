@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { Ms932Encoder } from "./encoder";
+import { Ms932Encoder } from "../../node/index.mjs";
 
 describe("Ms932Encoder.prototype.encode 12", () => {
 
