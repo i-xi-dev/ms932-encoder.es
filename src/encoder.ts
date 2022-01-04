@@ -20,7 +20,7 @@ class Ms932Encoder implements TextEncoder {
   readonly #common: Ms932EncoderCommon;
 
   /**
-   * @param options - Options for Ms932Encoder.
+   * @param options - The options for `Ms932Encoder`.
    */
   constructor(options?: Ms932EncoderOptions) {
     this.#common = new Ms932EncoderCommon(options);
@@ -28,21 +28,22 @@ class Ms932Encoder implements TextEncoder {
   }
 
   /**
-   * Gets "shift_jis".
+   * Gets `"shift_jis"`.
    */
   get encoding(): string {
     return this.#common.encoding;
   }
 
   /**
-   * Gets true if the error mode is "fatal", otherwise false.
+   * Gets `true` if the error mode is "fatal", otherwise `false`.
    */
   get fatal(): boolean {
     return this.#common.fatal;
   }
 
   /**
-   * Implements {@link TextEncoder.encode}.
+   * @see [TextEncoder.encode](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder/encode)
+   * @throws {Error} When `fatal` is `true`, the `input` contains characters that cannot be encoded in Windows-31J; Otherwise, no exceptions will be thrown.
    */
   encode(input = ""): Uint8Array {
     const tmp = new Array<uint8>(input.length * 2);
@@ -61,15 +62,14 @@ class Ms932Encoder implements TextEncoder {
     return Uint8Array.from(tmp.slice(0, written));
   }
 
-  // XXX ブラウザのTextEncoder#encodeIntoだと、sourceは多分String(source)している
-  //     （string型以外のいかなる型でもあっても多分落ちない）
   /**
-   * Implements {@link TextEncoder.encodeInto}.
+   * @see [TextEncoder.encodeInto](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder/encodeInto)
+   * @throws {Error} When `fatal` is `true`, the `input` contains characters that cannot be encoded in Windows-31J; Otherwise, no exceptions will be thrown.
    */
   encodeInto(source: string, destination: Uint8Array): TextEncoderEncodeIntoResult {
     let read = 0;
     let written = 0;
-    for (const c of source) {
+    for (const c of String(source)) { // ブラウザのTextEncoder#encodeIntoだと、sourceがstring型以外のいかなる型でもあっても多分落ちない
       const codePoint = c.codePointAt(0) as number;
       const bytes = encodeChar(codePoint, this.fatal);
 

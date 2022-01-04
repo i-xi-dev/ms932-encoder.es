@@ -1,5 +1,3 @@
 //
 
-export {
-  Ms932EncoderStream,
-} from "./encoder_stream";
+export { Ms932EncoderStream } from "./encoder_stream";

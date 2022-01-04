@@ -11,6 +11,9 @@ type Ms932EncoderStreamPending = {
 };
 
 // $011 class Ms932EncoderStream extends TransformStream<string, Uint8Array> implements TextEncoderStream {
+/**
+ * The `TransformStream` that encodes a stream of string into Windows-31J encoded byte stream.
+ */
 class Ms932EncoderStream implements TextEncoderStream {
   /**
    * Common getters.
@@ -22,7 +25,7 @@ class Ms932EncoderStream implements TextEncoderStream {
   readonly #stream: TransformStream<string, Uint8Array>;
 
   /**
-   * @param options - Options for Ms932EncoderStream.
+   * @param options - The options for `Ms932EncoderStream`.
    */
   constructor(options?: Ms932EncoderOptions) {
     const self = (): Ms932EncoderStream => this;
@@ -48,16 +51,14 @@ class Ms932EncoderStream implements TextEncoderStream {
   }
 
   /**
-   * Gets "shift_jis".
-   * 
-   * Implements {@link TextEncoderStream.encoding}.
+   * Gets `"shift_jis"`.
    */
   get encoding(): string {
     return this.#common.encoding;
   }
 
   /**
-   * Gets true if the error mode is "fatal", otherwise false.
+   * Gets `true` if the error mode is "fatal", otherwise `false`.
    */
   get fatal(): boolean {
     return this.#common.fatal;
@@ -65,7 +66,7 @@ class Ms932EncoderStream implements TextEncoderStream {
 
   // $011
   /**
-   * Implements {@link TextEncoderStream.writable}.
+   * @see [TextEncoderStream.writable](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream/writable)
    */
   get writable(): WritableStream<string> {
     return this.#stream.writable;
@@ -73,7 +74,7 @@ class Ms932EncoderStream implements TextEncoderStream {
 
   // $011
   /**
-   * Implements {@link TextEncoderStream.readable}.
+   * @see [TextEncoderStream.readable](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream/readable)
    */
   get readable(): ReadableStream<Uint8Array> {
     return this.#stream.readable;

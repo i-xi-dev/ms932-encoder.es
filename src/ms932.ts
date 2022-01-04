@@ -64,7 +64,7 @@ class Ms932EncoderCommon implements TextEncoderCommon {
 }
 
 /**
- * Options for Ms932Encoder and Ms932EncoderStream.
+ * The options for `Ms932Encoder` and `Ms932EncoderStream`.
  */
 type Ms932EncoderOptions = {
   /**
