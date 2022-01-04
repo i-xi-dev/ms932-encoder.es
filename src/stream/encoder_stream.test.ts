@@ -1,9 +1,10 @@
+import assert from "node:assert";
 import { Ms932EncoderStream } from "./encoder_stream";
 
 describe("Ms932EncoderStream.prototype.encoding", () => {
   it("encoding", () => {
     const ms932Encoder1 = new Ms932EncoderStream();
-    expect(ms932Encoder1.encoding).toBe("shift_jis");
+    assert.strictEqual(ms932Encoder1.encoding, "shift_jis");
 
   });
 
@@ -12,13 +13,13 @@ describe("Ms932EncoderStream.prototype.encoding", () => {
 describe("Ms932EncoderStream.prototype.fatal", () => {
   it("fatal", () => {
     const ms932Encoder1 = new Ms932EncoderStream({fatal:true});
-    expect(ms932Encoder1.fatal).toBe(true);
+    assert.strictEqual(ms932Encoder1.fatal, true);
 
     const ms932Encoder2 = new Ms932EncoderStream({fatal:false});
-    expect(ms932Encoder2.fatal).toBe(false);
+    assert.strictEqual(ms932Encoder2.fatal, false);
 
     const ms932Encoder3 = new Ms932EncoderStream();
-    expect(ms932Encoder3.fatal).toBe(false);
+    assert.strictEqual(ms932Encoder3.fatal, false);
 
   });
 
@@ -89,7 +90,7 @@ describe("Ms932EncoderStream.prototype.writable", () => {
       + "0x41,0x41,0x41,0x3F,0x41,"
       + "0x00,0x41,0x00,0x00,0x00";
 
-    expect([...result].map(e => "0x" + e.toString(16).toUpperCase().padStart(2, "0")).join(",")).toBe(expected);
+    assert.strictEqual([...result].map(e => "0x" + e.toString(16).toUpperCase().padStart(2, "0")).join(","), expected);
 
   });
 
@@ -157,7 +158,7 @@ describe("Ms932EncoderStream.prototype.writable", () => {
       + "0x41,0x41,0x41,0x3F,0x41,"
       + "0x00,0x3F,0x00,0x00,0x00";
 
-    expect([...result].map(e => "0x" + e.toString(16).toUpperCase().padStart(2, "0")).join(",")).toBe(expected);
+    assert.strictEqual([...result].map(e => "0x" + e.toString(16).toUpperCase().padStart(2, "0")).join(","), expected);
 
   });
 
