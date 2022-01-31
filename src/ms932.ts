@@ -57,6 +57,7 @@ class Ms932EncoderCommon implements TextEncoderCommon {
 
   /**
    * Gets true if the error mode is "fatal", otherwise false.
+   * The default is `false`.
    */
   get fatal(): boolean {
     return this.#errorMode === "fatal";
