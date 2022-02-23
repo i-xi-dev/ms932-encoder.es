@@ -1,10 +1,10 @@
-import assert from "node:assert";
-import { Ms932Encoder } from "../../node/index.mjs";
+import { expect } from '@esm-bundle/chai';
+import { Ms932Encoder } from "../../dist/index.js";
 
 describe("Ms932Encoder.prototype.encoding", () => {
   it("encoding", () => {
     const ms932Encoder1 = new Ms932Encoder();
-    assert.strictEqual(ms932Encoder1.encoding, "shift_jis");
+    expect(ms932Encoder1.encoding).to.equal("shift_jis");
 
   });
 
@@ -13,13 +13,13 @@ describe("Ms932Encoder.prototype.encoding", () => {
 describe("Ms932Encoder.prototype.fatal", () => {
   it("fatal", () => {
     const ms932Encoder1 = new Ms932Encoder({fatal:true});
-    assert.strictEqual(ms932Encoder1.fatal, true);
+    expect(ms932Encoder1.fatal).to.equal(true);
 
     const ms932Encoder2 = new Ms932Encoder({fatal:false});
-    assert.strictEqual(ms932Encoder2.fatal, false);
+    expect(ms932Encoder2.fatal).to.equal(false);
 
     const ms932Encoder3 = new Ms932Encoder();
-    assert.strictEqual(ms932Encoder3.fatal, false);
+    expect(ms932Encoder3.fatal).to.equal(false);
 
   });
 
