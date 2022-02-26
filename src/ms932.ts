@@ -1,6 +1,7 @@
 //
 
 import {
+  type codepoint,
   type uint8,
 } from "@i-xi-dev/fundamental";
 
@@ -84,7 +85,7 @@ type Ms932EncoderOptions = {
  * @param exceptionFallback - 符号化失敗時に例外を投げるか否か
  * @returns MS932 encoded byte array.
  */
-function encodeChar(codePoint: number, exceptionFallback: boolean): [ uint8 ] | [ uint8, uint8 ] {
+function encodeChar(codePoint: codepoint, exceptionFallback: boolean): [ uint8 ] | [ uint8, uint8 ] {
   if (codePoint <= 0x80) {
     // 2.
     return [ (codePoint as uint8) ];
@@ -139,7 +140,7 @@ function encodeChar(codePoint: number, exceptionFallback: boolean): [ uint8 ] | 
  * 
  * {@link [index-jis0208.txt](https://encoding.spec.whatwg.org/index-jis0208.txt)}を加工
  */
-const TABLE = new Map<number, number>([
+const TABLE = new Map<codepoint, number>([
   [ 0x3000, 0 ],
   [ 0x3001, 1 ],
   [ 0x3002, 2 ],

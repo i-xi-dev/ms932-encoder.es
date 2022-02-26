@@ -1,5 +1,6 @@
 //
 
+import { type codepoint } from "@i-xi-dev/fundamental";
 import {
   type Ms932EncoderOptions,
   encodeChar,
@@ -97,7 +98,7 @@ class Ms932EncoderStream implements TextEncoderStream {
     let written = 0;
     for (let i = 0; i < cCount; i++) {
       const c = cs[i] as string;
-      const codePoint = c.codePointAt(0) as number;
+      const codePoint = c.codePointAt(0) as codepoint;
 
       if (((i + 1) === cCount) && (codePoint >= 0xD800) && (codePoint <= 0xDBFF)) {
         this.#pending.highSurrogate = c;

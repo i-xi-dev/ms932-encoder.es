@@ -1,6 +1,7 @@
 //
 
 import {
+  type codepoint,
   type uint8,
 } from "@i-xi-dev/fundamental";
 
@@ -49,7 +50,7 @@ class Ms932Encoder implements TextEncoder {
     const tmp = new Array<uint8>(input.length * 2);
     let written = 0;
     for (const c of input) {
-      const codePoint = c.codePointAt(0) as number;
+      const codePoint = c.codePointAt(0) as codepoint;
       const bytes = encodeChar(codePoint, this.fatal);
       tmp[written] = bytes[0];
       written = written + 1;
@@ -70,7 +71,7 @@ class Ms932Encoder implements TextEncoder {
     let read = 0;
     let written = 0;
     for (const c of String(source)) { // ブラウザのTextEncoder#encodeIntoだと、sourceがstring型以外のいかなる型でもあっても多分落ちない
-      const codePoint = c.codePointAt(0) as number;
+      const codePoint = c.codePointAt(0) as codepoint;
       const bytes = encodeChar(codePoint, this.fatal);
 
       if ((written + bytes.length) > destination.length) {
