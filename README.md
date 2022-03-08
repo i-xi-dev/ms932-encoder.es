@@ -80,6 +80,13 @@ encoder.encode("𩸽");
 ```
 
 ```javascript
+const encoder = new Ms932Encoder({ replacementChar: "■" });
+
+encoder.encode("𩸽");
+// → Uint8Array[ 0x81, 0xA1 ]
+```
+
+```javascript
 const encoder = new Ms932Encoder({ fatal: true });
 
 encoder.encode("𩸽");

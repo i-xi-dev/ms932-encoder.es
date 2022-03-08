@@ -14,6 +14,14 @@ type Ms932EncoderStreamPending = {
 // $011 class Ms932EncoderStream extends TransformStream<string, Uint8Array> implements TextEncoderStream {
 /**
  * The `TransformStream` that encodes a stream of string into Windows-31J encoded byte stream.
+ * 
+ * @example
+ * ```javascript
+ * const encoderStream = new Ms932EncoderStream();
+ * // readableStream: ReadableStream<string>
+ * // writableStream: WritableStream<Uint8Array>
+ * readableStream.pipeThrough(encoderStream).pipeTo(writableStream);
+ * ```
  */
 class Ms932EncoderStream implements TextEncoderStream {
   /**
@@ -37,7 +45,7 @@ class Ms932EncoderStream implements TextEncoderStream {
       },
       flush(controller: TransformStreamDefaultController<Uint8Array>): void {
         if (self().#pending.highSurrogate.length > 0) {
-          controller.enqueue(Uint8Array.of(0x3F)); // TODO U+FFFDはWindows-31Jで表現できない為、U+003Fとする //TODO オプション指定可能にする
+          controller.enqueue(Uint8Array.from(self().#common._replacement.bytes)); // U+FFFDはWindows-31Jで表現できない
         }
       },
     };
@@ -105,7 +113,7 @@ class Ms932EncoderStream implements TextEncoderStream {
         break;
       }
 
-      const bytes = encodeChar(codePoint, this.fatal);
+      const bytes = encodeChar(codePoint, this.fatal, this.#common._replacement.bytes);
       tmp[written] = bytes[0];
       written = written + 1;
       if (bytes.length > 1) {

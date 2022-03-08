@@ -6,7 +6,7 @@ import {
 } from "@i-xi-dev/fundamental";
 
 // /**
-//  * The labels of MS932 encoding.
+//  * The labels of Windows-31J encoding.
 //  * 
 //  * {@link https://encoding.spec.whatwg.org/#names-and-labels}
 //  */
@@ -20,6 +20,34 @@ import {
 //   "windows-31j",
 //   "x-sjis",
 // ];
+
+type Ms932CharBytes = [ uint8 ] | [ uint8, uint8 ];
+
+type _Replacement = {
+  bytes: Readonly<Ms932CharBytes>,
+  char: string,
+};
+
+function _getReplacement(replacementChar: unknown): _Replacement {
+  if ((typeof replacementChar === "string") && (replacementChar.length === 1)) {
+    // U+10000以上にWindows-31Jで符号化できる文字は存在しないので、length===1でなければNG
+
+    try {
+      const replacementBytes: Ms932CharBytes = encodeChar(replacementChar.codePointAt(0) as codepoint, true, [ 0x3F ]);
+      return {
+        bytes: Object.freeze(replacementBytes) as Ms932CharBytes,
+        char: replacementChar,
+      };
+    }
+    catch {
+      //
+    }
+  }
+  return {
+    bytes: Object.freeze([ 0x3F ]) as Ms932CharBytes,
+    char: "?",
+  };
+}
 
 /**
  * The error mode for Ms932EncoderCommon.
@@ -41,11 +69,23 @@ class Ms932EncoderCommon implements TextEncoderCommon {
   readonly #errorMode: Ms932ErrorMode;
 
   /**
+   * #errorModeが"replacement"の場合の符号化できない文字の置換文字
+   */
+  readonly #replacement: Readonly<_Replacement>;
+
+  /**
    * @param options The error mode.
    */
   constructor(options?: Ms932EncoderOptions) {
     this.#name = "Shift_JIS";
-    this.#errorMode = (options?.fatal === true) ? "fatal" : "replacement";
+    if (options?.fatal === true) {
+      this.#errorMode = "fatal";
+      this.#replacement = Object.freeze(_getReplacement("?")) as _Replacement;
+    }
+    else {
+      this.#errorMode = "replacement";
+      this.#replacement = Object.freeze(_getReplacement(options?.replacementChar)) as _Replacement;
+    }
     Object.freeze(this);
   }
 
@@ -63,6 +103,13 @@ class Ms932EncoderCommon implements TextEncoderCommon {
   get fatal(): boolean {
     return this.#errorMode === "fatal";
   }
+
+  /**
+   * #errorModeが"replacement"の場合の符号化できない文字の置換文字
+   */
+  get _replacement(): Readonly<_Replacement> {
+    return this.#replacement;
+  }
 }
 
 /**
@@ -73,6 +120,16 @@ type Ms932EncoderOptions = {
    * Whether or not to set the error mode to "fatal".
    */
   fatal?: boolean,
+
+  /**
+   * The replacement character used for fallback. The default is `"?"`. (U+FFFD can not encode to Windows-31J)
+   * `replacementChar` is ignored if `fatal` is `true`.
+   * 
+   * The following restrictions apply:
+   * - The `length` of the `replacementChar` must be 1.
+   * - The `replacementChar` must be able to encode to Windows-31J.
+   */
+  replacementChar?: string,
 };
 
 /**
@@ -83,9 +140,10 @@ type Ms932EncoderOptions = {
  * 
  * @param codePoint - Unicode code point.
  * @param exceptionFallback - 符号化失敗時に例外を投げるか否か
+ * @param replacementFallback - 符号化失敗時に置換する文字のバイト列
  * @returns MS932 encoded byte array.
  */
-function encodeChar(codePoint: codepoint, exceptionFallback: boolean): [ uint8 ] | [ uint8, uint8 ] {
+function encodeChar(codePoint: codepoint, exceptionFallback: boolean, replacementFallback: Readonly<Ms932CharBytes>): Ms932CharBytes {
   if (codePoint <= 0x80) {
     // 2.
     return [ (codePoint as uint8) ];
@@ -116,7 +174,7 @@ function encodeChar(codePoint: codepoint, exceptionFallback: boolean): [ uint8 ]
     if (exceptionFallback === true) {
       throw new Error(`EncodingError U+${ codePoint.toString(16).toUpperCase().padStart(4, "0") }`); // TODO TypeError?
     }
-    return [ 0x3F ]; // U+FFFDはWindows-31Jで表現できない為、U+003Fとする //TODO オプション指定可能にする
+    return [ ...replacementFallback ]; // U+FFFDはWindows-31Jで表現できない
   }
 
   // 9.

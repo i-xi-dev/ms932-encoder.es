@@ -13,6 +13,21 @@ describe("Ms932Encoder.prototype.encode", () => {
     expect([...ms932Encoder2.encode("\u0081")].join(",")).to.equal("63");
     expect([...ms932Encoder2.encode("\u{29e3d}")].join(",")).to.equal("63");
 
+
+    const ms932Encoder1b = new Ms932Encoder({fatal:true,replacementChar: "X"});
+    expect(() => {
+      ms932Encoder1b.encode("\u0081");
+    }).to.throw(Error, "EncodingError U+0081");
+
+    const ms932Encoder2b = new Ms932Encoder({replacementChar: "X"});
+    expect([...ms932Encoder2b.encode("\u0081")].join(",")).to.equal("88");
+    expect([...ms932Encoder2b.encode("\u{29e3d}")].join(",")).to.equal("88");
+    expect([...ms932Encoder2b.encode("X\u0081")].join(",")).to.equal("88,88");
+
+    const ms932Encoder2c = new Ms932Encoder({replacementChar: "■"});
+    expect([...ms932Encoder2c.encode("\u0081")].join(",")).to.equal("129,161");
+    expect([...ms932Encoder2c.encode("X\u0081X")].join(",")).to.equal("88,129,161,88");
+
   });
 
   it("encode(string)", () => {
