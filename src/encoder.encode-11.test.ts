@@ -1,10 +1,10 @@
 import { expect } from '@esm-bundle/chai';
-import { Ms932Encoder } from "./encoder";
+import { Ms932 } from "./index";
 
-describe("Ms932Encoder.prototype.encode 11", () => {
+describe("Ms932.Encoder.prototype.encode 11", () => {
 
   it("encode(string) - U+A000-U+AFFF", () => {
-    const ms932Encoder = new Ms932Encoder({fatal:true});
+    const ms932Encoder = new Ms932.Encoder({fatal:true});
 
 expect(() => {ms932Encoder.encode("\uA000")}).to.throw(Error, "EncodingError U+A000");
 expect(() => {ms932Encoder.encode("\uA001")}).to.throw(Error, "EncodingError U+A001");

@@ -1,10 +1,10 @@
 import { expect } from '@esm-bundle/chai';
-import { Ms932Encoder } from "../../dist/index.js";
+import { Ms932 } from "../../dist/index.js";
 
-describe("Ms932Encoder.prototype.encode 9", () => {
+describe("Ms932.Encoder.prototype.encode 9", () => {
 
   it("encode(string) - U+8800-U+8BFF", () => {
-    const ms932Encoder = new Ms932Encoder({fatal:true});
+    const ms932Encoder = new Ms932.Encoder({fatal:true});
 
     let r = true;
 expect(() => {ms932Encoder.encode("\u8800")}).to.throw(Error, "EncodingError U+8800");

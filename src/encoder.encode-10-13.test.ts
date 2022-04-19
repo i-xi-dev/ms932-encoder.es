@@ -1,10 +1,10 @@
 import { expect } from '@esm-bundle/chai';
-import { Ms932Encoder } from "./encoder";
+import { Ms932 } from "./index";
 
-describe("Ms932Encoder.prototype.encode 10", () => {
+describe("Ms932.Encoder.prototype.encode 10", () => {
 
   it("encode(string) - U+9C00-U+9FFF", () => {
-    const ms932Encoder = new Ms932Encoder({fatal:true});
+    const ms932Encoder = new Ms932.Encoder({fatal:true});
 
     let r = true;
 r = r && ([...ms932Encoder.encode("鰀")].join(",") === "252,70"); // U+9C00

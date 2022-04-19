@@ -1,37 +1,37 @@
 import { expect } from '@esm-bundle/chai';
-import { Ms932Encoder } from "./encoder";
+import { Ms932 } from "./index";
 
-describe("Ms932Encoder.prototype.encode", () => {
+describe("Ms932.Encoder.prototype.encode", () => {
   it("encode(string, Object)", () => {
     // fallback
-    const ms932Encoder1 = new Ms932Encoder({fatal:true});
+    const ms932Encoder1 = new Ms932.Encoder({fatal:true});
     expect(() => {
       ms932Encoder1.encode("\u0081");
     }).to.throw(Error, "EncodingError U+0081");
 
-    const ms932Encoder2 = new Ms932Encoder(/*{fatal: false}*/);
+    const ms932Encoder2 = new Ms932.Encoder(/*{fatal: false}*/);
     expect([...ms932Encoder2.encode("\u0081")].join(",")).to.equal("63");
     expect([...ms932Encoder2.encode("\u{29e3d}")].join(",")).to.equal("63");
 
 
-    const ms932Encoder1b = new Ms932Encoder({fatal:true,replacementChar: "X"});
+    const ms932Encoder1b = new Ms932.Encoder({fatal:true,replacementChar: "X"});
     expect(() => {
       ms932Encoder1b.encode("\u0081");
     }).to.throw(Error, "EncodingError U+0081");
 
-    const ms932Encoder2b = new Ms932Encoder({replacementChar: "X"});
+    const ms932Encoder2b = new Ms932.Encoder({replacementChar: "X"});
     expect([...ms932Encoder2b.encode("\u0081")].join(",")).to.equal("88");
     expect([...ms932Encoder2b.encode("\u{29e3d}")].join(",")).to.equal("88");
     expect([...ms932Encoder2b.encode("X\u0081")].join(",")).to.equal("88,88");
 
-    const ms932Encoder2c = new Ms932Encoder({replacementChar: "■"});
+    const ms932Encoder2c = new Ms932.Encoder({replacementChar: "■"});
     expect([...ms932Encoder2c.encode("\u0081")].join(",")).to.equal("129,161");
     expect([...ms932Encoder2c.encode("X\u0081X")].join(",")).to.equal("88,129,161,88");
 
   });
 
   it("encode(string)", () => {
-    const ms932Encoder = new Ms932Encoder({fatal:true});
+    const ms932Encoder = new Ms932.Encoder({fatal:true});
 
     let r = true;
     expect([...ms932Encoder.encode("\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000A\u000B\u000C\u000D\u000E\u000F\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001A\u001B\u001C\u001D\u001E\u001F !\u0022#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")].join(",")).to.equal("0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128"); // U+0000

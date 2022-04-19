@@ -1,16 +1,9 @@
 import { expect } from '@esm-bundle/chai';
-import { Ms932EncoderStream } from "../../../dist/stream/index.js";
-
-if (globalThis.process) {
-  const webStream = await import("node:stream/web");
-  globalThis.ReadableStream = webStream.ReadableStream;
-  globalThis.WritableStream = webStream.WritableStream;
-  globalThis.TransformStream = webStream.TransformStream;
-}
+import { Ms932 } from "./index";
 
 describe("Ms932EncoderStream.prototype.encoding", () => {
   it("encoding", () => {
-    const ms932Encoder1 = new Ms932EncoderStream();
+    const ms932Encoder1 = new Ms932.EncoderStream();
     expect(ms932Encoder1.encoding).to.equal("shift_jis");
 
   });
@@ -19,13 +12,13 @@ describe("Ms932EncoderStream.prototype.encoding", () => {
 
 describe("Ms932EncoderStream.prototype.fatal", () => {
   it("fatal", () => {
-    const ms932Encoder1 = new Ms932EncoderStream({fatal:true});
+    const ms932Encoder1 = new Ms932.EncoderStream({fatal:true});
     expect(ms932Encoder1.fatal).to.equal(true);
 
-    const ms932Encoder2 = new Ms932EncoderStream({fatal:false});
+    const ms932Encoder2 = new Ms932.EncoderStream({fatal:false});
     expect(ms932Encoder2.fatal).to.equal(false);
 
-    const ms932Encoder3 = new Ms932EncoderStream();
+    const ms932Encoder3 = new Ms932.EncoderStream();
     expect(ms932Encoder3.fatal).to.equal(false);
 
   });
@@ -54,7 +47,7 @@ describe("Ms932EncoderStream.prototype.writable", () => {
       "A",
     ]
 
-    let ti;
+    let ti: NodeJS.Timer;
     const s = new ReadableStream({
       start(controller) {
         let c = 0;
@@ -72,14 +65,14 @@ describe("Ms932EncoderStream.prototype.writable", () => {
     });
 
     await (() => {
-      return new Promise((resolve) => {
+      return new Promise<void>((resolve) => {
         setTimeout(() => {
           resolve();
         }, 200);
       });
     })();
 
-    const ms932Encoder1 = new Ms932EncoderStream();
+    const ms932Encoder1 = new Ms932.EncoderStream();
 
     const result = new Uint8Array(20);
     let written = 0;
@@ -122,7 +115,7 @@ describe("Ms932EncoderStream.prototype.writable", () => {
       "\u{D800}",
     ]
 
-    let ti;
+    let ti: NodeJS.Timer;
     const s = new ReadableStream({
       start(controller) {
         let c = 0;
@@ -140,14 +133,14 @@ describe("Ms932EncoderStream.prototype.writable", () => {
     });
 
     await (() => {
-      return new Promise((resolve) => {
+      return new Promise<void>((resolve) => {
         setTimeout(() => {
           resolve();
         }, 200);
       });
     })();
 
-    const ms932Encoder1 = new Ms932EncoderStream();
+    const ms932Encoder1 = new Ms932.EncoderStream();
 
     const result = new Uint8Array(20);
     let written = 0;

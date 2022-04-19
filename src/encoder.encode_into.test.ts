@@ -1,15 +1,15 @@
 import { expect } from '@esm-bundle/chai';
-import { Ms932Encoder } from "./encoder";
+import { Ms932 } from "./index";
 
-describe("Ms932Encoder.prototype.encodeInto", () => {
+describe("Ms932.Encoder.prototype.encodeInto", () => {
   it("encodeInto(string, Object)", () => {
     // fallback
-    const ms932Encoder1 = new Ms932Encoder({fatal:true});
+    const ms932Encoder1 = new Ms932.Encoder({fatal:true});
     expect(() => {
       ms932Encoder1.encodeInto("\u0081", new Uint8Array());
     }).to.throw(Error, "EncodingError U+0081");
 
-    const ms932Encoder2 = new Ms932Encoder(/*{fatal: false}*/);
+    const ms932Encoder2 = new Ms932.Encoder(/*{fatal: false}*/);
 
     const b1 = new Uint8Array(4);
     const r1 = ms932Encoder2.encodeInto("\u0081", b1);
@@ -26,7 +26,7 @@ describe("Ms932Encoder.prototype.encodeInto", () => {
   });
 
   it("encodeInto(string)", () => {
-    const ms932Encoder = new Ms932Encoder();
+    const ms932Encoder = new Ms932.Encoder();
     const td = new TextDecoder("shift_jis");
 
     const b1 = new Uint8Array(10);
