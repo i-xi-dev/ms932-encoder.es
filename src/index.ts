@@ -8035,6 +8035,7 @@ namespace Ms932 {
    * const encoderStream = new Ms932.EncoderStream();
    * // readableStream: ReadableStream<string>
    * // writableStream: WritableStream<Uint8Array>
+   * 
    * readableStream.pipeThrough(encoderStream).pipeTo(writableStream);
    * ```
    */
