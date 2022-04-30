@@ -1,4 +1,6 @@
 import { TransformStream } from "node:stream/web";
-globalThis.TransformStream = TransformStream;
+if (!globalThis.TransformStream) {
+  globalThis.TransformStream = TransformStream;
+}
 
 export * from "../dist/index.js";
