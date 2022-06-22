@@ -1,12 +1,12 @@
 # @i-xi-dev/ms932-encoder
 
-A JavaScript Windows-31J encoder, implements [Shift_JIS encoder](https://encoding.spec.whatwg.org/#shift_jis-encoder) defined in WHATWG Encoding Standard.
-
+A JavaScript Windows-31J encoder, implements
+[Shift_JIS encoder](https://encoding.spec.whatwg.org/#shift_jis-encoder) defined
+in WHATWG Encoding Standard.
 
 ## Documentation
 
 [https://i-xi-dev.github.io/ms932-encoder.es/](https://i-xi-dev.github.io/ms932-encoder.es/)
-
 
 ## Requirement
 
@@ -21,14 +21,14 @@ A JavaScript Windows-31J encoder, implements [Shift_JIS encoder](https://encodin
 
 ### `Ms932.EncoderStream` class
 
-`Ms932.EncoderStream` requires [`TransformStream`](https://developer.mozilla.org/en-US/docs/Web/API/TransformStream).
+`Ms932.EncoderStream` requires
+[`TransformStream`](https://developer.mozilla.org/en-US/docs/Web/API/TransformStream).
 
 - Chrome
 - Edge
 - Safari 14.1+
 - Deno
 - Node.js 16.5.0+
-
 
 ## Installation
 
@@ -45,16 +45,18 @@ import { Ms932 } from "@i-xi-dev/ms932-encoder";
 ### CDN
 
 Example for Skypack
+
 ```javascript
 import { Ms932 } from "https://cdn.skypack.dev/@i-xi-dev/ms932-encoder";
 ```
-
 
 ## Usage
 
 ### `Ms932.Encoder` class
 
-The `Ms932.Encoder` implements the [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder) interface.
+The `Ms932.Encoder` implements the
+[`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder)
+interface.
 
 ```javascript
 const encoder = new Ms932.Encoder();
@@ -70,6 +72,7 @@ const { read, written } = encoder.encodeInto("あいうえお", bytes);
 ```
 
 #### Encoding error handling
+
 ```javascript
 const encoder = new Ms932.Encoder({ fatal: false }); // default
 
@@ -93,7 +96,9 @@ encoder.encode("𩸽");
 
 ### `Ms932.EncoderStream` class
 
-The `Ms932.EncoderStream` implements [`TextEncoderStream`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream) interface.
+The `Ms932.EncoderStream` implements
+[`TextEncoderStream`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream)
+interface.
 
 ```javascript
 const encoderStream = new Ms932.EncoderStream();
@@ -103,13 +108,14 @@ const encoderStream = new Ms932.EncoderStream();
 readableStream.pipeThrough(encoderStream).pipeTo(writableStream);
 ```
 
-
 ## FAQ
 
 **Q:** Where is Ms932.Decoder?
 
-**A:** Browsers and Node.js implement the [Shift_JIS decoder](https://encoding.spec.whatwg.org/#shift_jis-decoder).
-Use a [`TextDecoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder).
+**A:** Browsers and Node.js implement the
+[Shift_JIS decoder](https://encoding.spec.whatwg.org/#shift_jis-decoder). Use a
+[`TextDecoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder).
+
 ```javascript
 const decoder = new TextDecoder("shift_jis");
 ```
