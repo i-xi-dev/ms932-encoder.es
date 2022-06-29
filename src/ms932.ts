@@ -1,12 +1,8 @@
 //
 
-import {
-  type uint8,
-} from "https://raw.githubusercontent.com/i-xi-dev/fundamental.es/7.0.1/src/byte.ts";
-import {
-  type codepoint,
-} from "https://raw.githubusercontent.com/i-xi-dev/fundamental.es/7.0.1/src/unicode.ts";
-import { _ts } from "./p.ts";
+import { type byte } from "https://raw.githubusercontent.com/i-xi-dev/byte.es/1.0.0/src/byte.ts";
+import { type codepoint } from "https://raw.githubusercontent.com/i-xi-dev/fundamental.es/7.0.1/src/unicode.ts";
+import { _TransformStream } from "https://raw.githubusercontent.com/i-xi-dev/compat.es/1.0.0/src/transform_stream.ts";
 
 // /**
 //  * The labels of Windows-31J encoding.
@@ -24,7 +20,7 @@ import { _ts } from "./p.ts";
 //   "x-sjis",
 // ];
 
-type _Ms932CharBytes = [uint8] | [uint8, uint8];
+type _Ms932CharBytes = [byte] | [byte, byte];
 
 type _Replacement = {
   bytes: Readonly<_Ms932CharBytes>;
@@ -137,7 +133,7 @@ function _encodeChar(
 ): _Ms932CharBytes {
   if (codePoint <= 0x80) {
     // 2.
-    return [codePoint as uint8];
+    return [codePoint as byte];
   } else if (codePoint === 0xA5) {
     // 3.
     return [0x5C];
@@ -146,7 +142,7 @@ function _encodeChar(
     return [0x7E];
   } else if (codePoint >= 0xFF61 && codePoint <= 0xFF9F) {
     // 5.
-    return [(codePoint - 0xFF61 + 0xA1) as uint8];
+    return [(codePoint - 0xFF61 + 0xA1) as byte];
   }
 
   // 6.
@@ -182,7 +178,7 @@ function _encodeChar(
   const offset = (tail < 0x3F) ? 0x40 : 0x41;
 
   // 13.
-  return [(lead + leadOffset) as uint8, (tail + offset) as uint8];
+  return [(lead + leadOffset) as byte, (tail + offset) as byte];
 }
 
 /**
@@ -7994,7 +7990,7 @@ namespace Ms932 {
      * @throws {Error} When `fatal` is `true`, the `input` contains characters that cannot be encoded in Windows-31J; Otherwise, no exceptions will be thrown.
      */
     encode(input = ""): Uint8Array {
-      const tmp = new Array<uint8>(input.length * 2);
+      const tmp = new Array<byte>(input.length * 2);
       let written = 0;
       for (const c of input) {
         const codePoint = c.codePointAt(0) as codepoint;
@@ -8006,7 +8002,7 @@ namespace Ms932 {
         tmp[written] = bytes[0];
         written = written + 1;
         if (bytes.length > 1) {
-          tmp[written] = bytes[1] as uint8;
+          tmp[written] = bytes[1] as byte;
           written = written + 1;
         }
       }
@@ -8098,7 +8094,7 @@ namespace Ms932 {
       this.#pending = Object.seal({
         highSurrogate: "",
       });
-      this.#stream = new _ts<string, Uint8Array>(transformer); // $011
+      this.#stream = new _TransformStream<string, Uint8Array>(transformer); // $011
 
       Object.freeze(this);
     }
