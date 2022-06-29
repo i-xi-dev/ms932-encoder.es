@@ -49,7 +49,7 @@ import { Ms932 } from "https://cdn.skypack.dev/@i-xi-dev/ms932-encoder";
 
 ## Usage
 
-### [`Ms932.Encoder`](https://doc.deno.land/https://raw.githubusercontent.com/i-xi-dev/ms932-encoder.es/2.0.4/mod.ts/~/Ms932.Encoder) class
+### [`Ms932.Encoder`](https://doc.deno.land/https://raw.githubusercontent.com/i-xi-dev/ms932-encoder.es/2.0.5/mod.ts/~/Ms932.Encoder) class
 
 The `Ms932.Encoder` implements the
 [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder)
@@ -91,7 +91,7 @@ encoder.encode("𩸽");
 // → throws Error.
 ```
 
-### [`Ms932.EncoderStream`](https://doc.deno.land/https://raw.githubusercontent.com/i-xi-dev/ms932-encoder.es/2.0.4/mod.ts/~/Ms932.EncoderStream) class
+### [`Ms932.EncoderStream`](https://doc.deno.land/https://raw.githubusercontent.com/i-xi-dev/ms932-encoder.es/2.0.5/mod.ts/~/Ms932.EncoderStream) class
 
 The `Ms932.EncoderStream` implements
 [`TextEncoderStream`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream)

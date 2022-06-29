@@ -12,7 +12,7 @@ await build({
   rootTestDir: "./tests",
   package: {
     name: "@i-xi-dev/ms932-encoder",
-    version: "2.0.4",
+    version: "2.0.5",
     description:
       "A JavaScript Windows-31J encoder, implements Shift_JIS encoder defined in WHATWG Encoding Standard.",
     license: "MIT",
