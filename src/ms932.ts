@@ -1,8 +1,9 @@
 //
 
 import { type byte } from "https://raw.githubusercontent.com/i-xi-dev/byte.es/1.0.0/mod.ts";
-import { type codepoint } from "https://raw.githubusercontent.com/i-xi-dev/fundamental.es/7.0.1/src/unicode.ts";
 import { _TransformStream } from "https://raw.githubusercontent.com/i-xi-dev/compat.es/1.0.0/mod.ts";
+
+type codepoint = number;
 
 // /**
 //  * The labels of Windows-31J encoding.
