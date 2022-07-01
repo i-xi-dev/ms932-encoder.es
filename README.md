@@ -9,23 +9,19 @@ in WHATWG Encoding Standard.
 
 ### `Ms932.Encoder` class
 
-- Chrome
-- Edge
-- Firefox
-- Safari
-- Deno
-- Node.js
+| Chrome | Edge | Firefox | Safari | Deno | Node.js |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### `Ms932.EncoderStream` class
 
 `Ms932.EncoderStream` requires
 [`TransformStream`](https://developer.mozilla.org/en-US/docs/Web/API/TransformStream).
 
-- Chrome
-- Edge
-- Safari 14.1+
-- Deno
-- Node.js 16.5.0+
+| Chrome | Edge | Firefox | Safari | Deno | Node.js |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| ✅ | ✅ | ✅<br />102+ | ✅<br />14.1+ | ✅ | ✅<br />16.5+ |
+
 
 ## Installation
 

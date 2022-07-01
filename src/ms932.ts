@@ -7922,7 +7922,7 @@ type _EncoderStreamPending = {
 
 namespace Ms932 {
   /**
-   * The options for `Ms932.Encoder` and `Ms932EncoderStream`.
+   * The options for `Ms932.Encoder` and `Ms932.EncoderStream`.
    */
   export type EncoderOptions = {
     /**
