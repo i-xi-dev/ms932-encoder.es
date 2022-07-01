@@ -9,13 +9,11 @@ if (!globalThis.ReadableStream) {
 }
 
 Deno.test("Ms932.EncoderStream.prototype.encoding", () => {
-  // encoding
   const ms932Encoder1 = new Ms932.EncoderStream();
   assertStrictEquals(ms932Encoder1.encoding, "shift_jis");
 });
 
 Deno.test("Ms932.EncoderStream.prototype.fatal", () => {
-  // fatal
   const ms932Encoder1 = new Ms932.EncoderStream({ fatal: true });
   assertStrictEquals(ms932Encoder1.fatal, true);
 
@@ -27,7 +25,6 @@ Deno.test("Ms932.EncoderStream.prototype.fatal", () => {
 });
 
 Deno.test("Ms932.EncoderStream.prototype.writable", async () => {
-  // writable
   const td = [
     "ABC",
     "あ",
@@ -98,7 +95,6 @@ Deno.test("Ms932.EncoderStream.prototype.writable", async () => {
 });
 
 Deno.test("Ms932.EncoderStream.prototype.writable - 2", async () => {
-  // writable
   const td = [
     "ABC",
     "あ",
