@@ -1,7 +1,6 @@
 //
 
-import { type byte } from "https://raw.githubusercontent.com/i-xi-dev/byte.es/1.0.0/mod.ts";
-import { _TransformStream } from "https://raw.githubusercontent.com/i-xi-dev/compat.es/1.0.1/mod.ts";
+import { _TransformStream, type byte } from "./deps.ts";
 
 type codepoint = number;
 
