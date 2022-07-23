@@ -1,6 +1,6 @@
 //
 
-import { _TransformStream, type byte } from "./deps.ts";
+import { _TransformStream, type uint8 } from "./deps.ts";
 
 type codepoint = number;
 
@@ -20,13 +20,22 @@ type codepoint = number;
 //   "x-sjis",
 // ];
 
-type _Ms932CharBytes = [byte] | [byte, byte];
+/**
+ * @internal
+ */
+type _Ms932CharBytes = [uint8] | [uint8, uint8];
 
+/**
+ * @internal
+ */
 type _Replacement = {
   bytes: Readonly<_Ms932CharBytes>;
   char: string;
 };
 
+/**
+ * @internal
+ */
 function _getReplacement(replacementChar: unknown): _Replacement {
   if ((typeof replacementChar === "string") && (replacementChar.length === 1)) {
     // U+10000以上にWindows-31Jで符号化できる文字は存在しないので、length===1でなければNG
@@ -53,11 +62,15 @@ function _getReplacement(replacementChar: unknown): _Replacement {
 
 /**
  * The error mode for _Ms932EncoderCommon.
+ *
+ * @internal
  */
 type _ErrorMode = "fatal" | "replacement";
 
 /**
  * Common getters that are shared between Ms932.Encoder and Ms932EncoderStream.
+ *
+ * @internal
  */
 class _Ms932EncoderCommon /* implements TextEncoderCommon */ {
   /**
@@ -121,6 +134,7 @@ class _Ms932EncoderCommon /* implements TextEncoderCommon */ {
  * {@link [Shift_JIS encoder](https://encoding.spec.whatwg.org/#shift_jis-encoder)}の仕様に従った。
  * （注: 上記仕様において"Shift_JIS"はWindows-31Jから私用領域を除いたものを指す）
  *
+ * @internal
  * @param codePoint - Unicode code point.
  * @param exceptionFallback - 符号化失敗時に例外を投げるか否か
  * @param replacementFallback - 符号化失敗時に置換する文字のバイト列
@@ -133,7 +147,7 @@ function _encodeChar(
 ): _Ms932CharBytes {
   if (codePoint <= 0x80) {
     // 2.
-    return [codePoint as byte];
+    return [codePoint as uint8];
   } else if (codePoint === 0xA5) {
     // 3.
     return [0x5C];
@@ -142,7 +156,7 @@ function _encodeChar(
     return [0x7E];
   } else if (codePoint >= 0xFF61 && codePoint <= 0xFF9F) {
     // 5.
-    return [(codePoint - 0xFF61 + 0xA1) as byte];
+    return [(codePoint - 0xFF61 + 0xA1) as uint8];
   }
 
   // 6.
@@ -178,13 +192,15 @@ function _encodeChar(
   const offset = (tail < 0x3F) ? 0x40 : 0x41;
 
   // 13.
-  return [(lead + leadOffset) as byte, (tail + offset) as byte];
+  return [(lead + leadOffset) as uint8, (tail + offset) as uint8];
 }
 
 /**
  * JIS 0208 index
  *
  * {@link [index-jis0208.txt](https://encoding.spec.whatwg.org/index-jis0208.txt)}を加工
+ *
+ * @internal
  */
 const _TABLE = new Map<codepoint, number>([
   [0x3000, 0],
@@ -7915,6 +7931,9 @@ const _TABLE = new Map<codepoint, number>([
   [0x9ED1, 11103],
 ]);
 
+/**
+ * @internal
+ */
 type _EncoderStreamPending = {
   highSurrogate: string;
 };
@@ -7990,7 +8009,7 @@ namespace Ms932 {
      * @throws {Error} When `fatal` is `true`, the `input` contains characters that cannot be encoded in Windows-31J; Otherwise, no exceptions will be thrown.
      */
     encode(input = ""): Uint8Array {
-      const tmp = new Array<byte>(input.length * 2);
+      const tmp = new Array<uint8>(input.length * 2);
       let written = 0;
       for (const c of input) {
         const codePoint = c.codePointAt(0) as codepoint;
@@ -8002,7 +8021,7 @@ namespace Ms932 {
         tmp[written] = bytes[0];
         written = written + 1;
         if (bytes.length > 1) {
-          tmp[written] = bytes[1] as byte;
+          tmp[written] = bytes[1] as uint8;
           written = written + 1;
         }
       }
