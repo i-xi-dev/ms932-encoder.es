@@ -28,7 +28,7 @@ in WHATWG Encoding Standard.
 ### npm
 
 ```console
-$ npm i @i-xi-dev/ms932-encoder
+$ npm i @i-xi-dev/ms932-encoder@2.0.7
 ```
 
 ```javascript
@@ -40,12 +40,12 @@ import { Ms932 } from "@i-xi-dev/ms932-encoder";
 Example for Skypack
 
 ```javascript
-import { Ms932 } from "https://cdn.skypack.dev/@i-xi-dev/ms932-encoder";
+import { Ms932 } from "https://cdn.skypack.dev/@i-xi-dev/ms932-encoder@2.0.7";
 ```
 
 ## Usage
 
-### [`Ms932.Encoder`](https://doc.deno.land/https://raw.githubusercontent.com/i-xi-dev/ms932-encoder.es/2.0.6/mod.ts/~/Ms932.Encoder) class
+### [`Ms932.Encoder`](https://doc.deno.land/https://raw.githubusercontent.com/i-xi-dev/ms932-encoder.es/2.0.7/mod.ts/~/Ms932.Encoder) class
 
 The `Ms932.Encoder` implements the
 [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder)
