@@ -1,5 +1,5 @@
 import { assertStrictEquals } from "std/testing/asserts";
-import { Ms932 } from "../src/ms932.ts";
+import { Ms932 } from "../mod.ts";
 
 if (!globalThis.ReadableStream) {
   const nodeUrl = "node:stream/web";
@@ -45,6 +45,7 @@ Deno.test("Ms932.EncoderStream.prototype.writable", async () => {
     "A",
   ];
 
+  // deno-lint-ignore no-explicit-any
   let ti: any;
   const s = new ReadableStream({
     start(controller) {
@@ -115,6 +116,7 @@ Deno.test("Ms932.EncoderStream.prototype.writable - 2", async () => {
     "\uD800",
   ];
 
+  // deno-lint-ignore no-explicit-any
   let ti: any;
   const s = new ReadableStream({
     start(controller) {
