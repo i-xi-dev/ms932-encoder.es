@@ -1,5 +1,5 @@
-import { type uint8 } from "https://raw.githubusercontent.com/i-xi-dev/int.es/1.1.1/mod.ts";
-import { _TransformStream } from "https://raw.githubusercontent.com/i-xi-dev/compat.es/1.1.2/mod.ts";
+import { type uint8 } from "i-xi-dev/int.es";
+import { _TransformStream } from "i-xi-dev/compat.es";
 
 type codepoint = number;
 
@@ -94,12 +94,12 @@ class _Ms932EncoderCommon /* implements TextEncoderCommon */ {
     this.#name = "Shift_JIS";
     if (options?.fatal === true) {
       this.#errorMode = "fatal";
-      this.#replacement = Object.freeze(_getReplacement("?")) as _Replacement;
+      const r = _getReplacement("?");
+      this.#replacement = Object.freeze(r);
     } else {
       this.#errorMode = "replacement";
-      this.#replacement = Object.freeze(
-        _getReplacement(options?.replacementChar),
-      ) as _Replacement;
+      const r = _getReplacement(options?.replacementChar);
+      this.#replacement = Object.freeze(r);
     }
     Object.freeze(this);
   }

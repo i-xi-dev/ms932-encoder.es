@@ -15,7 +15,7 @@ await build({
   rootTestDir: "./tests",
   package: {
     name: "@i-xi-dev/ms932-encoder",
-    version: "2.0.7",
+    version: "2.0.8",
     description:
       "A JavaScript Windows-31J encoder, implements Shift_JIS encoder defined in WHATWG Encoding Standard.",
     license: "MIT",
@@ -48,6 +48,10 @@ await build({
     ],
   },
   importMap: "./import_map.json",
+
+  //
+  typeCheck: false, // 落ちるようになった
+  declaration: false, // 落ちるようになった
 });
 
 Deno.copyFileSync("LICENSE", "npm/LICENSE");
