@@ -1,5 +1,4 @@
-import { type uint8 } from "i-xi-dev/int.es";
-import { _TransformStream } from "i-xi-dev/compat.es";
+import { type uint8, _TransformStream } from "../deps.ts";
 
 type codepoint = number;
 

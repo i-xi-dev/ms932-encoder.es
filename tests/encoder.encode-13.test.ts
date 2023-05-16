@@ -1,4 +1,4 @@
-import { assertThrows } from "std/testing/asserts";
+import { assertThrows } from "./deps.ts";
 import { Ms932 } from "../mod.ts";
 
 Deno.test("Ms932.Encoder.prototype.encode(string) - U+C000-U+CFFF", () => {

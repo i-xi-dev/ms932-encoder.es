@@ -15,7 +15,7 @@ await build({
   rootTestDir: "./tests",
   package: {
     name: "@i-xi-dev/ms932-encoder",
-    version: "2.0.10",
+    version: "2.0.11",
     description:
       "A JavaScript Windows-31J encoder, implements Shift_JIS encoder defined in WHATWG Encoding Standard.",
     license: "MIT",
@@ -47,7 +47,6 @@ await build({
       "types",
     ],
   },
-  importMap: "./import_map.json",
 
   //
   typeCheck: false, // 落ちるようになった

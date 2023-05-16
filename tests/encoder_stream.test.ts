@@ -1,4 +1,4 @@
-import { assertStrictEquals } from "std/testing/asserts";
+import { assertStrictEquals } from "./deps.ts";
 import { Ms932 } from "../mod.ts";
 
 if (!globalThis.ReadableStream) {
