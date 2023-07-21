@@ -13,7 +13,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9800-U+9BFF", () => {
     "EncodingError U+9800",
   );
   r = r &&
-    ([...ms932Encoder.encode("頁頂頃")].join(",") === "149,197,146,184,141,160"); // U+9801
+    ([...ms932Encoder.encode("頁頂頃")].join(",") ===
+      "149,197,146,184,141,160"); // U+9801
   assertThrows(
     () => {
       ms932Encoder.encode("\u9804");
@@ -280,7 +281,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9800-U+9BFF", () => {
     "EncodingError U+983A",
   );
   r = r &&
-    ([...ms932Encoder.encode("頻頼頽")].join(",") === "149,112,151,138,232,246"); // U+983B
+    ([...ms932Encoder.encode("頻頼頽")].join(",") ===
+      "149,112,151,138,232,246"); // U+983B
   assertThrows(
     () => {
       ms932Encoder.encode("\u983E");
@@ -2345,7 +2347,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9800-U+9BFF", () => {
     "EncodingError U+99AB",
   );
   r = r &&
-    ([...ms932Encoder.encode("馬馭馮")].join(",") === "148,110,233,102,233,103"); // U+99AC
+    ([...ms932Encoder.encode("馬馭馮")].join(",") ===
+      "148,110,233,102,233,103"); // U+99AC
   assertThrows(
     () => {
       ms932Encoder.encode("\u99AF");
@@ -2469,7 +2472,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9800-U+9BFF", () => {
     "EncodingError U+99C3",
   );
   r = r &&
-    ([...ms932Encoder.encode("駄駅駆")].join(",") === "145,202,137,119,139,236"); // U+99C4
+    ([...ms932Encoder.encode("駄駅駆")].join(",") ===
+      "145,202,137,119,139,236"); // U+99C4
   assertThrows(
     () => {
       ms932Encoder.encode("\u99C7");
@@ -2528,7 +2532,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9800-U+9BFF", () => {
     "EncodingError U+99CF",
   );
   r = r &&
-    ([...ms932Encoder.encode("駐駑駒")].join(",") === "146,147,233,109,139,238"); // U+99D0
+    ([...ms932Encoder.encode("駐駑駒")].join(",") ===
+      "146,147,233,109,139,238"); // U+99D0
   assertThrows(
     () => {
       ms932Encoder.encode("\u99D3");
@@ -3338,7 +3343,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9800-U+9BFF", () => {
     "EncodingError U+9A68",
   );
   r = r &&
-    ([...ms932Encoder.encode("驩驪驫")].join(",") === "233,137,233,139,233,138"); // U+9A69
+    ([...ms932Encoder.encode("驩驪驫")].join(",") ===
+      "233,137,233,139,233,138"); // U+9A69
   assertThrows(
     () => {
       ms932Encoder.encode("\u9A6C");
@@ -4602,7 +4608,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9800-U+9BFF", () => {
     "EncodingError U+9B4C",
   );
   r = r &&
-    ([...ms932Encoder.encode("魍魎魏")].join(",") === "233,177,233,178,233,176"); // U+9B4D
+    ([...ms932Encoder.encode("魍魎魏")].join(",") ===
+      "233,177,233,178,233,176"); // U+9B4D
   assertThrows(
     () => {
       ms932Encoder.encode("\u9B50");
@@ -4991,7 +4998,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9800-U+9BFF", () => {
     "EncodingError U+9B90",
   );
   r = r &&
-    ([...ms932Encoder.encode("鮑鮒鮓")].join(",") === "233,184,149,169,233,182"); // U+9B91
+    ([...ms932Encoder.encode("鮑鮒鮓")].join(",") ===
+      "233,184,149,169,233,182"); // U+9B91
   assertThrows(
     () => {
       ms932Encoder.encode("\u9B94");
@@ -5462,7 +5470,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9800-U+9BFF", () => {
     "EncodingError U+9BEF",
   );
   r = r &&
-    ([...ms932Encoder.encode("鯰鯱鯲")].join(",") === "233,206,233,205,233,204"); // U+9BF0
+    ([...ms932Encoder.encode("鯰鯱鯲")].join(",") ===
+      "233,206,233,205,233,204"); // U+9BF0
   assertThrows(
     () => {
       ms932Encoder.encode("\u9BF3");

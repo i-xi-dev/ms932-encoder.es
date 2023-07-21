@@ -104,7 +104,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+600D",
   );
   r = r &&
-    ([...ms932Encoder.encode("怎怏怐")].join(",") === "156,131,156,137,156,129"); // U+600E
+    ([...ms932Encoder.encode("怎怏怐")].join(",") ===
+      "156,131,156,137,156,129"); // U+600E
   assertThrows(
     () => {
       ms932Encoder.encode("\u6011");
@@ -151,7 +152,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+601A",
   );
   r = r &&
-    ([...ms932Encoder.encode("怛怜思")].join(",") === "156,133,151,229,142,118"); // U+601B
+    ([...ms932Encoder.encode("怛怜思")].join(",") ===
+      "156,133,151,229,142,118"); // U+601B
   assertThrows(
     () => {
       ms932Encoder.encode("\u601E");
@@ -321,7 +323,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+6040",
   );
   r = r &&
-    ([...ms932Encoder.encode("恁恂恃")].join(",") === "156,140,156,150,156,148"); // U+6041
+    ([...ms932Encoder.encode("恁恂恃")].join(",") ===
+      "156,140,156,150,156,148"); // U+6041
   assertThrows(
     () => {
       ms932Encoder.encode("\u6044");
@@ -594,7 +597,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+6082",
   );
   r = r &&
-    ([...ms932Encoder.encode("悃悄悅")].join(",") === "156,157,156,159,250,189"); // U+6083
+    ([...ms932Encoder.encode("悃悄悅")].join(",") ===
+      "156,157,156,159,250,189"); // U+6083
   assertThrows(
     () => {
       ms932Encoder.encode("\u6086");
@@ -871,7 +875,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+60C4",
   );
   r = r &&
-    ([...ms932Encoder.encode("情惆惇")].join(",") === "143,238,156,173,147,213"); // U+60C5
+    ([...ms932Encoder.encode("情惆惇")].join(",") ===
+      "143,238,156,173,147,213"); // U+60C5
   assertThrows(
     () => {
       ms932Encoder.encode("\u60C8");
@@ -1091,7 +1096,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+60F8",
   );
   r = r &&
-    ([...ms932Encoder.encode("惹惺惻")].join(",") === "142,228,156,183,156,186"); // U+60F9
+    ([...ms932Encoder.encode("惹惺惻")].join(",") ===
+      "142,228,156,183,156,186"); // U+60F9
   assertThrows(
     () => {
       ms932Encoder.encode("\u60FC");
@@ -1174,7 +1180,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+610C",
   );
   r = r &&
-    ([...ms932Encoder.encode("愍愎意")].join(",") === "156,188,156,189,136,211"); // U+610D
+    ([...ms932Encoder.encode("愍愎意")].join(",") ===
+      "156,188,156,189,136,211"); // U+610D
   assertThrows(
     () => {
       ms932Encoder.encode("\u6110");
@@ -1256,7 +1263,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+611E",
   );
   r = r &&
-    ([...ms932Encoder.encode("感愠愡")].join(",") === "138,180,250,193,156,185"); // U+611F
+    ([...ms932Encoder.encode("感愠愡")].join(",") ===
+      "138,180,250,193,156,185"); // U+611F
   assertThrows(
     () => {
       ms932Encoder.encode("\u6122");
@@ -1505,7 +1513,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+6157",
   );
   r = r &&
-    ([...ms932Encoder.encode("慘慙慚")].join(",") === "156,204,156,205,156,206"); // U+6158
+    ([...ms932Encoder.encode("慘慙慚")].join(",") ===
+      "156,204,156,205,156,206"); // U+6158
   assertThrows(
     () => {
       ms932Encoder.encode("\u615B");
@@ -1772,7 +1781,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+6197",
   );
   r = r &&
-    ([...ms932Encoder.encode("憘憙憚")].join(",") === "250,198,156,216,156,221"); // U+6198
+    ([...ms932Encoder.encode("憘憙憚")].join(",") ===
+      "250,198,156,216,156,221"); // U+6198
   assertThrows(
     () => {
       ms932Encoder.encode("\u619B");
@@ -2261,7 +2271,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+61F5",
   );
   r = r &&
-    ([...ms932Encoder.encode("懶懷懸")].join(",") === "156,239,156,229,140,156"); // U+61F6
+    ([...ms932Encoder.encode("懶懷懸")].join(",") ===
+      "156,239,156,229,140,156"); // U+61F6
   assertThrows(
     () => {
       ms932Encoder.encode("\u61F9");
@@ -2330,7 +2341,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+6207",
   );
   r = r &&
-    ([...ms932Encoder.encode("戈戉戊")].join(",") === "156,247,156,248,149,232"); // U+6208
+    ([...ms932Encoder.encode("戈戉戊")].join(",") ===
+      "156,247,156,248,149,232"); // U+6208
   assertThrows(
     () => {
       ms932Encoder.encode("\u620B");
@@ -2576,7 +2588,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+6246",
   );
   r = r &&
-    ([...ms932Encoder.encode("扇扈扉")].join(",") === "144,238,231,187,148,224"); // U+6247
+    ([...ms932Encoder.encode("扇扈扉")].join(",") ===
+      "144,238,231,187,148,224"); // U+6247
   assertThrows(
     () => {
       ms932Encoder.encode("\u624A");
@@ -3395,7 +3408,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+6306",
   );
   r = r &&
-    ([...ms932Encoder.encode("指挈按")].join(",") === "142,119,157,108,136,194"); // U+6307
+    ([...ms932Encoder.encode("指挈按")].join(",") ===
+      "142,119,157,108,136,194"); // U+6307
   assertThrows(
     () => {
       ms932Encoder.encode("\u630A");
@@ -3699,7 +3713,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+633C",
   );
   r = r &&
-    ([...ms932Encoder.encode("挽挾挿")].join(",") === "148,210,157,112,145,125"); // U+633D
+    ([...ms932Encoder.encode("挽挾挿")].join(",") ===
+      "148,210,157,112,145,125"); // U+633D
   assertThrows(
     () => {
       ms932Encoder.encode("\u6340");
@@ -3924,7 +3939,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+6366",
   );
   r = r &&
-    ([...ms932Encoder.encode("捧捨捩")].join(",") === "149,249,142,204,157,128"); // U+6367
+    ([...ms932Encoder.encode("捧捨捩")].join(",") ===
+      "149,249,142,204,157,128"); // U+6367
   assertThrows(
     () => {
       ms932Encoder.encode("\u636A");
@@ -4579,7 +4595,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+6000-U+63FF", () => {
     "EncodingError U+63F3",
   );
   r = r &&
-    ([...ms932Encoder.encode("援揵揶")].join(",") === "137,135,250,201,157,136"); // U+63F4
+    ([...ms932Encoder.encode("援揵揶")].join(",") ===
+      "137,135,250,201,157,136"); // U+63F4
   assertThrows(
     () => {
       ms932Encoder.encode("\u63F7");

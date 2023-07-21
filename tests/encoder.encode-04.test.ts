@@ -16,7 +16,9 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+3000-U+3FFF", () => {
     "EncodingError U+3004",
   );
   r = r &&
-    ([...ms932Encoder.encode("々〆〇〈〉《》「」『』【】〒〓〔〕")].join(",") ===
+    ([...ms932Encoder.encode("々〆〇〈〉《》「」『』【】〒〓〔〕")].join(
+      ",",
+    ) ===
       "129,88,129,89,129,90,129,113,129,114,129,115,129,116,129,117,129,118,129,119,129,120,129,121,129,122,129,167,129,172,129,107,129,108"); // U+3005
   assertThrows(
     () => {
@@ -4910,7 +4912,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+3000-U+3FFF", () => {
     "EncodingError U+339B",
   );
   r = r &&
-    ([...ms932Encoder.encode("㎜㎝㎞")].join(",") === "135,111,135,112,135,113"); // U+339C
+    ([...ms932Encoder.encode("㎜㎝㎞")].join(",") ===
+      "135,111,135,112,135,113"); // U+339C
   assertThrows(
     () => {
       ms932Encoder.encode("\u339F");

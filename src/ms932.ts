@@ -1,4 +1,4 @@
-import { type uint8, _TransformStream } from "../deps.ts";
+import { _TransformStream, type uint8 } from "../deps.ts";
 
 type codepoint = number;
 

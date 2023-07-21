@@ -142,7 +142,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+7000-U+73FF", () => {
     "EncodingError U+701C",
   );
   r = r &&
-    ([...ms932Encoder.encode("瀝瀞瀟")].join(",") === "224,108,147,210,224,110"); // U+701D
+    ([...ms932Encoder.encode("瀝瀞瀟")].join(",") ===
+      "224,108,147,210,224,110"); // U+701D
   assertThrows(
     () => {
       ms932Encoder.encode("\u7020");
@@ -3207,7 +3208,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+7000-U+73FF", () => {
     "EncodingError U+7245",
   );
   r = r &&
-    ([...ms932Encoder.encode("牆片版")].join(",") === "224,173,149,208,148,197"); // U+7246
+    ([...ms932Encoder.encode("牆片版")].join(",") ===
+      "224,173,149,208,148,197"); // U+7246
   assertThrows(
     () => {
       ms932Encoder.encode("\u7249");
@@ -3488,7 +3490,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+7000-U+73FF", () => {
     "EncodingError U+727F",
   );
   r = r &&
-    ([...ms932Encoder.encode("犀犁犂")].join(",") === "141,210,224,179,224,178"); // U+7280
+    ([...ms932Encoder.encode("犀犁犂")].join(",") ===
+      "141,210,224,179,224,178"); // U+7280
   assertThrows(
     () => {
       ms932Encoder.encode("\u7283");
@@ -3852,7 +3855,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+7000-U+73FF", () => {
     "EncodingError U+72C1",
   );
   r = r &&
-    ([...ms932Encoder.encode("狂狃狄")].join(",") === "139,182,224,187,224,189"); // U+72C2
+    ([...ms932Encoder.encode("狂狃狄")].join(",") ===
+      "139,182,224,187,224,189"); // U+72C2
   assertThrows(
     () => {
       ms932Encoder.encode("\u72C5");
@@ -4001,7 +4005,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+7000-U+73FF", () => {
     "EncodingError U+72DF",
   );
   r = r &&
-    ([...ms932Encoder.encode("狠狡狢")].join(",") === "224,193,224,194,224,192"); // U+72E0
+    ([...ms932Encoder.encode("狠狡狢")].join(",") ===
+      "224,193,224,194,224,192"); // U+72E0
   assertThrows(
     () => {
       ms932Encoder.encode("\u72E3");
@@ -4325,7 +4330,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+7000-U+73FF", () => {
     "EncodingError U+731A",
   );
   r = r &&
-    ([...ms932Encoder.encode("猛猜猝")].join(",") === "150,210,224,200,224,202"); // U+731B
+    ([...ms932Encoder.encode("猛猜猝")].join(",") ===
+      "150,210,224,200,224,202"); // U+731B
   assertThrows(
     () => {
       ms932Encoder.encode("\u731E");

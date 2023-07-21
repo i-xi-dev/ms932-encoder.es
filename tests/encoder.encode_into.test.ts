@@ -51,7 +51,10 @@ Deno.test("Ms932.Encoder.prototype.encodeInto(string)", () => {
   assertStrictEquals(r2.read, 14);
   assertStrictEquals(r2.written, 18);
 
-  assertStrictEquals(td.decode(b2.subarray(0, r2.written)), "あabcいうえお?123?");
+  assertStrictEquals(
+    td.decode(b2.subarray(0, r2.written)),
+    "あabcいうえお?123?",
+  );
 
   const b3 = new Uint8Array(10);
   const r3 = ms932Encoder.encodeInto("あabcいうえお\u{29e3d}123?", b3);

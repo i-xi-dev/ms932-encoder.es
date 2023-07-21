@@ -44,7 +44,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9C00-U+9FFF", () => {
     "EncodingError U+9C07",
   );
   r = r &&
-    ([...ms932Encoder.encode("鰈鰉鰊")].join(",") === "233,213,233,209,233,215"); // U+9C08
+    ([...ms932Encoder.encode("鰈鰉鰊")].join(",") ===
+      "233,213,233,209,233,215"); // U+9C08
   assertThrows(
     () => {
       ms932Encoder.encode("\u9C0B");
@@ -1734,7 +1735,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9C00-U+9FFF", () => {
     "EncodingError U+9D29",
   );
   r = r &&
-    ([...ms932Encoder.encode("鴪鴫鴬")].join(",") === "233,240,142,176,137,167"); // U+9D2A
+    ([...ms932Encoder.encode("鴪鴫鴬")].join(",") ===
+      "233,240,142,176,137,167"); // U+9D2A
   assertThrows(
     () => {
       ms932Encoder.encode("\u9D2D");
@@ -4315,7 +4317,8 @@ Deno.test("Ms932.Encoder.prototype.encode(string) - U+9C00-U+9FFF", () => {
     "EncodingError U+9EFA",
   );
   r = r &&
-    ([...ms932Encoder.encode("黻黼黽")].join(",") === "234,132,234,133,234,134"); // U+9EFB
+    ([...ms932Encoder.encode("黻黼黽")].join(",") ===
+      "234,132,234,133,234,134"); // U+9EFB
   assertThrows(
     () => {
       ms932Encoder.encode("\u9EFE");
