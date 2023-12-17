@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Windows-31J Encode</title>
+    <link href="./asset/base.css?2.0.11" rel="stylesheet" />
+    <script src="./asset/ms932_encode.mjs?2.0.11" type="module"></script>
+  </head>
+
+  <body>
+    <section>
+      <h1>Input</h1>
+
+      <dl>
+        <div>
+          <dt>[1]: String</dt>
+          <dd>
+            <input id="i1" type="text" />
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <div>
+      <details>
+        <summary>Options</summary>
+
+        <div>
+          <fieldset>
+            <legend>Encoding</legend>
+
+            <dl>
+              <div>
+                <dt>fatal</dt>
+                <dd>
+                  <input checked id="ip11" type="checkbox" />
+                </dd>
+              </div>
+
+              <div>
+                <dt>replacement character</dt>
+                <dd>
+                  <input id="ip12" maxlength="1" minlength="1" type="text" value="?" />
+                </dd>
+              </div>
+            </dl>
+          </fieldset>
+        </div>
+      </details>
+
+      <button id="a1">Windows-31J Encode</button>
+    </div>
+
+    <section>
+      <h1>Output</h1>
+      <dl>
+        <div>
+          <dt>[2]: Windows-31J encoded from [1]</dt>
+          <dd>
+            <output id="o1"></output>
+          </dd>
+        </div>
+
+        <div>
+          <dt>[3]: Windows-31J decoded from [2]</dt>
+          <dd>
+            <output id="o2"></output>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <div class="progress">
+      <progress></progress>
+    </div>
+  </body>
+</html>
