@@ -101,6 +101,10 @@ const encoderStream = new Ms932.EncoderStream();
 readableStream.pipeThrough(encoderStream).pipeTo(writableStream);
 ```
 
+## Examples
+
+- [Windows-31J encode](https://i-xi-dev.github.io/ms932-encoder.es/example/ms932_encode.html)
+
 ## FAQ
 
 **Q:** Where is Ms932.Decoder?
