@@ -1,5 +1,5 @@
-import { Ms932 } from "https://www.unpkg.com/@i-xi-dev/ms932-encoder@2.0.11/esm/mod.js";
-// https://cdn.skypack.dev/@i-xi-dev/ms932-encoder@2.0.11
+import { Ms932 } from "https://www.unpkg.com/@i-xi-dev/ms932-encoder@2.0.22/esm/mod.js";
+// https://cdn.skypack.dev/@i-xi-dev/ms932-encoder@2.0.22
 
 import { bytesToString, decodeMs932 } from "./lib.mjs";
 
@@ -23,8 +23,7 @@ a1.addEventListener("click", () => {
     const bytes = encoder.encode(i);
     o1.value = bytesToString(bytes);
     o2.value = decodeMs932(bytes);
-  }
-  catch {
+  } catch {
     o1.value = "error";
     o2.value = "error";
   }
