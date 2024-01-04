@@ -1,6 +1,4 @@
-import { _TransformStream, Uint8 } from "../deps.ts";
-
-type codepoint = number;
+import { _TransformStream, CodePoint, Uint8 } from "../deps.ts";
 
 // /**
 //  * The labels of Windows-31J encoding.
@@ -40,7 +38,7 @@ function _getReplacement(replacementChar: unknown): _Replacement {
 
     try {
       const replacementBytes: _Ms932CharBytes = _encodeChar(
-        replacementChar.codePointAt(0) as codepoint,
+        replacementChar.codePointAt(0) as CodePoint,
         true,
         [0x3F],
       );
@@ -139,7 +137,7 @@ class _Ms932EncoderCommon /* implements TextEncoderCommon */ {
  * @returns MS932 encoded byte array.
  */
 function _encodeChar(
-  codePoint: codepoint,
+  codePoint: CodePoint,
   exceptionFallback: boolean,
   replacementFallback: Readonly<_Ms932CharBytes>,
 ): _Ms932CharBytes {
@@ -200,7 +198,7 @@ function _encodeChar(
  *
  * @internal
  */
-const _TABLE = new Map<codepoint, number>([
+const _TABLE = new Map<CodePoint, number>([
   [0x3000, 0],
   [0x3001, 1],
   [0x3002, 2],
@@ -7936,7 +7934,7 @@ type _EncoderStreamPending = {
   highSurrogate: string;
 };
 
-namespace Ms932 {
+export namespace Ms932 {
   /**
    * The options for `Ms932.Encoder` and `Ms932.EncoderStream`.
    */
@@ -8010,7 +8008,7 @@ namespace Ms932 {
       const tmp = new Array<Uint8>(input.length * 2);
       let written = 0;
       for (const c of input) {
-        const codePoint = c.codePointAt(0) as codepoint;
+        const codePoint = c.codePointAt(0) as CodePoint;
         const bytes = _encodeChar(
           codePoint,
           this.fatal,
@@ -8038,7 +8036,7 @@ namespace Ms932 {
       let read = 0;
       let written = 0;
       for (const c of String(source)) { // ブラウザのTextEncoder#encodeIntoだと、sourceがstring型以外のいかなる型でもあっても多分落ちない
-        const codePoint = c.codePointAt(0) as codepoint;
+        const codePoint = c.codePointAt(0) as CodePoint;
         const bytes = _encodeChar(
           codePoint,
           this.fatal,
@@ -8163,7 +8161,7 @@ namespace Ms932 {
       let written = 0;
       for (let i = 0; i < cCount; i++) {
         const c = cs[i] as string;
-        const codePoint = c.codePointAt(0) as codepoint;
+        const codePoint = c.codePointAt(0) as CodePoint;
 
         if (
           ((i + 1) === cCount) && (codePoint >= 0xD800) && (codePoint <= 0xDBFF)
@@ -8190,6 +8188,3 @@ namespace Ms932 {
   }
   Object.freeze(EncoderStream);
 }
-Object.freeze(Ms932);
-
-export { Ms932 };

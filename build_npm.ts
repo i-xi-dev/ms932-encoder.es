@@ -1,4 +1,4 @@
-import { build, emptyDir } from "https://deno.land/x/dnt@0.38.1/mod.ts";
+import { build, emptyDir } from "https://deno.land/x/dnt@0.39.0/mod.ts";
 
 await emptyDir("./npm");
 
@@ -15,7 +15,7 @@ await build({
   rootTestDir: "./tests",
   package: {
     name: "@i-xi-dev/ms932-encoder",
-    version: "2.0.22",
+    version: "2.0.23",
     description:
       "A JavaScript Windows-31J encoder, implements Shift_JIS encoder defined in WHATWG Encoding Standard.",
     license: "MIT",
