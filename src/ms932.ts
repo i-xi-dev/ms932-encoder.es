@@ -83,145 +83,6 @@ function _getReplacement(
   };
 }
 
-export namespace Ms932 {
-  /**
-   * The options for `Ms932.Encoder` and `Ms932.EncoderStream`.
-   */
-  export type EncoderOptions = {
-    /**
-     * Whether or not to set the error mode to "fatal".
-     */
-    fatal?: boolean;
-
-    /**
-     * The replacement character used for fallback. The default is `"?"`. (U+FFFD can not encode to Windows-31J)
-     * `replacementChar` is ignored if `fatal` is `true`.
-     *
-     * The following restrictions apply:
-     * - The `length` of the `replacementChar` must be 1.
-     * - The `replacementChar` must be able to encode to Windows-31J.
-     */
-    replacementChar?: string;
-
-    strict?: boolean;
-  };
-
-  /**
-   * Windows-31J text encoder
-   *
-   * @example
-   * ```javascript
-   * const encoder = new Ms932.Encoder();
-   *
-   * encoder.encode("あいうえお");
-   * // → Uint8Array[ 0x82, 0xA0, 0x82, 0xA2, 0x82, 0xA4, 0x82, 0xA6, 0x82, 0xA8 ]
-   *
-   * const bytes = new Uint8Array(10);
-   * const { read, written } = encoder.encodeInto("あいうえお", bytes);
-   * // → read: 5
-   * //   written: 10
-   * //   bytes: Uint8Array[ 0x82, 0xA0, 0x82, 0xA2, 0x82, 0xA4, 0x82, 0xA6, 0x82, 0xA8 ]
-   * ```
-   */
-  export class Encoder extends TextEncoding.Encoder {
-    constructor(options: EncoderOptions = {}) {
-      super({
-        name: _LABEL,
-        fatal: options?.fatal === true,
-        replacementBytes: _getReplacement(options?.replacementChar).bytes,
-        encode: _encode,
-        prependBOM: false,
-        strict: options?.strict === true,
-        maxBytesPerRune: _MAX_BYTES_PER_RUNE,
-      });
-    }
-  }
-
-  /**
-   * The `TransformStream` that encodes a stream of string into Windows-31J encoded byte stream.
-   *
-   * @example
-   * ```javascript
-   * const encoderStream = new Ms932.EncoderStream();
-   * // readableStream: ReadableStream<string>
-   * // writableStream: WritableStream<Uint8Array>
-   *
-   * readableStream.pipeThrough(encoderStream).pipeTo(writableStream);
-   * ```
-   */
-  export class EncoderStream extends TextEncoding.EncoderStream {
-    constructor(options: EncoderOptions = {}) {
-      super({
-        name: _LABEL,
-        fatal: options?.fatal === true,
-        replacementBytes: _getReplacement(options?.replacementChar).bytes,
-        encode: _encode,
-        prependBOM: false,
-        strict: options?.strict === true,
-        maxBytesPerRune: _MAX_BYTES_PER_RUNE,
-      });
-    }
-
-    //TODO TextEncoding.EncoderStreamに移す
-    protected override _encodeChunk(chunk: string): Uint8Array {
-      const runes = [...(this._pending.highSurrogate + chunk)]; // ただし、末尾に単独サロゲートがあるかもしれない
-      this._pending.highSurrogate = "";
-
-      const cCount = runes.length;
-      const tmp = new Array(chunk.length * 2 + 1);
-      let written = 0;
-      for (let i = 0; i < cCount; i++) {
-        const rune = runes[i] as string;
-        const codePoint = rune.codePointAt(0) as CodePoint;
-
-        if (
-          ((i + 1) === cCount) && CodePoint.isHighSurrogateCodePoint(codePoint)
-        ) {
-          this._pending.highSurrogate = rune;
-          break;
-        }
-
-        const bytes = _encodeFromRune(
-          rune,
-          this.fatal,
-          this._common.replacementBytes,
-        );
-        tmp[written] = bytes[0];
-        written = written + 1;
-        if (bytes.length > 1) {
-          tmp[written] = bytes[1];
-          written = written + 1;
-        }
-      }
-
-      return Uint8Array.from(tmp.slice(0, written));
-    }
-  }
-}
-
-// /**
-//  * @internal
-//  */
-// type _Ms932CharBytes = Array<Uint8> /* [Uint8] | [Uint8, Uint8] */;
-
-// function _getReplacementBytes(replacementChar: unknown): _Ms932CharBytes {
-//   if ((typeof replacementChar === "string") && (replacementChar.length === 1)) {
-//     // U+10000以上にWindows-31Jで符号化できる文字は存在しないので、length===1でなければNG
-
-//     try {
-//       return   _encodeFromRune(
-//         replacementChar,
-//         true,
-//         _DEFAULT_REPLACEMENT_BYTES,
-//       );
-//     } catch {
-//       // _DEFAULT_REPLACEMENT_BYTES を返す
-//     }
-//   }
-
-//   return _DEFAULT_REPLACEMENT_BYTES;
-// }
-
 /**
  * 1文字をWindows-31Jのバイト列に変換
  *
@@ -8030,115 +7891,89 @@ const _TABLE = new Map<CodePoint, number>([
   [0x9ED1, 11103],
 ]);
 
-// /**
-//  * @internal
-//  */
-// type _EncoderStreamPending = {
-//   highSurrogate: string;
-// };
+export namespace Ms932 {
+  /**
+   * The options for `Ms932.Encoder` and `Ms932.EncoderStream`.
+   */
+  export type EncoderOptions = {
+    /**
+     * Whether or not to set the error mode to "fatal".
+     */
+    fatal?: boolean;
 
-//export namespace Ms932 {
-// export class xEncoder /* extends TextEncoding.EncoderBase */ {
-//   /**
-//    * @param options - The options for `Ms932.Encoder`.
-//    */
-//   constructor(options?: EncoderOptions) {
-//     super({
-//       name: _LABEL,
-//       fatal: (options?.fatal === true),
-//       replacementBytes: _getReplacementBytes(options?.replacementChar),
-//       encodeFromRune: _encodeFromRune,
-//       prependBOM: false,
-//     });
-//     Object.freeze(this);
-//   }
+    /**
+     * The replacement character used for fallback. The default is `"?"`. (U+FFFD can not encode to Windows-31J)
+     * `replacementChar` is ignored if `fatal` is `true`.
+     *
+     * The following restrictions apply:
+     * - The `length` of the `replacementChar` must be 1.
+     * - The `replacementChar` must be able to encode to Windows-31J.
+     */
+    replacementChar?: string;
 
-//   /**
-//    * @see [TextEncoder.encode](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder/encode)
-//    * @throws {Error} When `fatal` is `true`, the `input` contains characters that cannot be encoded in Windows-31J; Otherwise, no exceptions will be thrown.
-//    */
-//   override encode(input = ""): Uint8Array {
-//     const tmp = new Array<Uint8>(input.length * 2);
-//     let written = 0;
-//     for (const rune of input) {
-//       const bytes = _encodeFromRune(
-//         rune,
-//         this.fatal,
-//         this._common.replacementBytes,
-//       );
-//       tmp[written] = bytes[0];
-//       written = written + 1;
-//       if (bytes.length > 1) {
-//         tmp[written] = bytes[1] as Uint8;
-//         written = written + 1;
-//       }
-//     }
+    strict?: boolean;
+  };
 
-//     return Uint8Array.from(tmp.slice(0, written));
-//   }
+  /**
+   * Windows-31J text encoder
+   *
+   * @example
+   * ```javascript
+   * const encoder = new Ms932.Encoder();
+   *
+   * encoder.encode("あいうえお");
+   * // → Uint8Array[ 0x82, 0xA0, 0x82, 0xA2, 0x82, 0xA4, 0x82, 0xA6, 0x82, 0xA8 ]
+   *
+   * const bytes = new Uint8Array(10);
+   * const { read, written } = encoder.encodeInto("あいうえお", bytes);
+   * // → read: 5
+   * //   written: 10
+   * //   bytes: Uint8Array[ 0x82, 0xA0, 0x82, 0xA2, 0x82, 0xA4, 0x82, 0xA6, 0x82, 0xA8 ]
+   * ```
+   */
+  export class Encoder extends TextEncoding.Encoder {
+    /**
+     * @param options - The options for `Ms932.Encoder`.
+     */
+    constructor(options: EncoderOptions = {}) {
+      super({
+        name: _LABEL,
+        fatal: options?.fatal === true,
+        replacementBytes: _getReplacement(options?.replacementChar).bytes,
+        encode: _encode,
+        prependBOM: false,
+        strict: options?.strict === true,
+        maxBytesPerRune: _MAX_BYTES_PER_RUNE,
+      });
+    }
+  }
 
-//   /**
-//    * @see [TextEncoder.encodeInto](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder/encodeInto)
-//    * @throws {Error} When `fatal` is `true`, the `input` contains characters that cannot be encoded in Windows-31J; Otherwise, no exceptions will be thrown.
-//    */
-//   override encodeInto(
-//     source: string,
-//     destination: Uint8Array,
-//   ): TextEncoderEncodeIntoResult {
-//     let read = 0;
-//     let written = 0;
-//     for (const rune of String(source)) { // ブラウザのTextEncoder#encodeIntoだと、sourceがstring型以外のいかなる型でもあっても多分落ちない
-//       const bytes = _encodeFromRune(
-//         rune,
-//         this.fatal,
-//         this._common.replacementBytes,
-//       );
-
-//       if ((written + bytes.length) > destination.length) {
-//         break;
-//       }
-
-//       const codePoint = rune.codePointAt(0) as CodePoint;
-//       read = read + (codePoint <= 0xFFFF ? 1 : 2);
-//       destination.set(bytes, written);
-//       written = written + bytes.length;
-//     }
-
-//     return {
-//       read,
-//       written,
-//     };
-//   }
-// }
-// Object.freeze(Encoder);
-
-// // $011 class Ms932.EncoderStream extends TransformStream<string, Uint8Array> implements TextEncoderStream {
-// export class EncoderStream extends TextEncoding.EncoderStreamBase {
-//   /**
-//    * @param options - The options for `Ms932.EncoderStream`.
-//    */
-//   constructor(options?: EncoderOptions) {
-//     super({
-//       name: _LABEL,
-//       fatal: (options?.fatal === true),
-//       replacementBytes: _getReplacementBytes(options?.replacementChar),
-//       encodeFromRune: _encodeFromRune,
-//       prependBOM: false,
-//     });
-//     Object.freeze(this);
-//   }
-
-//   /**
-//    * チャンクを符号化
-//    *
-//    * https://encoding.spec.whatwg.org/#interface-textencoderstream のとおりの処理ではないが、結果は同じはず
-//    *
-//    * @param chunk - 文字列
-//    * @returns chunkを符号化したバイト列
-//    */
-//   protected _encodeChunk(chunk: string): Uint8Array {
-
-//   }
-// }
-// Object.freeze(EncoderStream);
-//}
+  /**
+   * The `TransformStream` that encodes a stream of string into Windows-31J encoded byte stream.
+   *
+   * @example
+   * ```javascript
+   * const encoderStream = new Ms932.EncoderStream();
+   * // readableStream: ReadableStream<string>
+   * // writableStream: WritableStream<Uint8Array>
+   *
+   * readableStream.pipeThrough(encoderStream).pipeTo(writableStream);
+   * ```
+   */
+  export class EncoderStream extends TextEncoding.EncoderStream {
+    /**
+     * @param options - The options for `Ms932.EncoderStream`.
+     */
+    constructor(options: EncoderOptions = {}) {
+      super({
+        name: _LABEL,
+        fatal: options?.fatal === true,
+        replacementBytes: _getReplacement(options?.replacementChar).bytes,
+        encode: _encode,
+        prependBOM: false,
+        strict: options?.strict === true,
+        maxBytesPerRune: _MAX_BYTES_PER_RUNE,
+      });
+    }
+  }
+}
