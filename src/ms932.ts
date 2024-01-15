@@ -2,7 +2,6 @@ import {
   _TransformStream,
   CodePoint,
   Rune,
-  SafeInteger,
   StringEx,
   TextEncoding,
   Uint8,
@@ -17,7 +16,6 @@ type _RuneBytes = Array<Uint8>; // [Uint8] | [Uint8, Uint8] ;
 function _encode(
   srcString: string,
   dstBuffer: ArrayBuffer,
-  dstOffset: SafeInteger,
   options: {
     fatal: boolean;
     replacementBytes: Array<Uint8>;
@@ -42,7 +40,7 @@ function _encode(
     // const codePoint = rune.codePointAt(0) as CodePoint;
 
     for (let i = 0; i < bytes.length; i++) {
-      dstView[dstOffset + written] = bytes[i];
+      dstView[written] = bytes[i];
       written = written + 1;
     }
   }
@@ -66,7 +64,6 @@ function _getReplacement(
       const { written } = _encode(
         replacementRune,
         tmp,
-        0,
         { fatal: true, replacementBytes: _DEFAULT_REPLACEMENT_BYTES },
       );
       return {
