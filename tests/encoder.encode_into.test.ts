@@ -9,7 +9,7 @@ Deno.test("Ms932.Encoder.prototype.encodeInto(string, Object)", () => {
       ms932Encoder1.encodeInto("\u0081", new Uint8Array());
     },
     Error,
-    "EncodingError U+0081",
+    "encode-error: U+0081",
   );
 
   const ms932Encoder2 = new Ms932.Encoder(/*{fatal: false}*/);

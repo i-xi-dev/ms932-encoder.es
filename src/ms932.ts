@@ -126,14 +126,9 @@ function _encodeFromRune(
   // 8.
   if (typeof pointer !== "number") {
     if (exceptionFallback === true) {
-      throw new Error(
-        `EncodingError U+${
-          codePoint.toString(16).toUpperCase().padStart(4, "0")
-        }`,
-      ); // TODO TypeError?
-      // throw new TypeError(
-      //   `encode-error: ${rune} ${CodePoint.toString(codePoint)}`,
-      // );
+      throw new TypeError(
+        `encode-error: ${CodePoint.toString(codePoint)}`,
+      );
     }
     return [...replacementFallback];
   }

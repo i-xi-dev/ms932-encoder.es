@@ -84,7 +84,7 @@ encoder.encode("𩸽");
 const encoder = new Ms932.Encoder({ fatal: true });
 
 encoder.encode("𩸽");
-// → throws Error.
+// → throws TypeError.
 ```
 
 ### [`Ms932.EncoderStream`](https://doc.deno.land/https://raw.githubusercontent.com/i-xi-dev/ms932-encoder.es/2.0.25/mod.ts/~/Ms932.EncoderStream) class
