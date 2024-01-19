@@ -351,6 +351,9 @@ Deno.test("Ms932.EncoderStream.prototype.readable,writable - fatal:true", async 
         c = c + 1;
       }, 10);
     },
+    cancel() {
+      clearInterval(ti);
+    },
   });
 
   await (() => {
