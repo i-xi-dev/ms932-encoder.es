@@ -14,40 +14,40 @@ const _MAX_BYTES_PER_RUNE = 2;
 type _RuneBytes = Array<Uint8>; // [Uint8] | [Uint8, Uint8] ;
 
 function _encode(
-  srcString: string,
+  srcRunesAsString: string,
   dstBuffer: ArrayBuffer,
   options: {
     fatal: boolean;
     replacementBytes: Array<Uint8>;
   },
-): TextEncoderEncodeIntoResult {
+): TextEncoding.EncodeResult {
   const dstView = new Uint8Array(dstBuffer);
 
-  let read = 0;
-  let written = 0;
+  let readCharCount = 0;
+  let writtenByteCount = 0;
 
-  for (const rune of srcString) {
+  for (const rune of srcRunesAsString) {
     const bytes = _encodeFromRune(
       rune,
       options.fatal,
       options.replacementBytes,
     );
 
-    if ((written + bytes.length) > dstView.length) {
+    if ((writtenByteCount + bytes.length) > dstView.length) {
       break;
     }
-    read = read + rune.length;
+    readCharCount = readCharCount + rune.length;
     // const codePoint = rune.codePointAt(0) as CodePoint;
 
     for (let i = 0; i < bytes.length; i++) {
-      dstView[written] = bytes[i];
-      written = written + 1;
+      dstView[writtenByteCount] = bytes[i];
+      writtenByteCount = writtenByteCount + 1;
     }
   }
 
   return {
-    read,
-    written,
+    readCharCount,
+    writtenByteCount,
   };
 }
 
@@ -61,14 +61,16 @@ function _getReplacement(
   if (StringEx.isString(replacementRune) && (replacementRune.length === 1)) {
     try {
       const tmp = new ArrayBuffer(_MAX_BYTES_PER_RUNE);
-      const { written } = _encode(
+      const { writtenByteCount } = _encode(
         replacementRune,
         tmp,
         { fatal: true, replacementBytes: _DEFAULT_REPLACEMENT_BYTES },
       );
       return {
         rune: replacementRune,
-        bytes: [...new Uint8Array(tmp.slice(0, written))] as Array<Uint8>,
+        bytes: [...new Uint8Array(tmp.slice(0, writtenByteCount))] as Array<
+          Uint8
+        >,
       };
     } catch {
       // _DEFAULT_REPLACEMENT_BYTES を返す
@@ -7971,6 +7973,10 @@ export namespace Ms932 {
         strict: options?.strict === true,
         maxBytesPerRune: _MAX_BYTES_PER_RUNE,
       });
+    }
+
+    override get [Symbol.toStringTag](): string {
+      return "Ms932.EncoderStream";
     }
   }
 }
