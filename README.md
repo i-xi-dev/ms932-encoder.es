@@ -28,7 +28,7 @@ in WHATWG Encoding Standard.
 ### npm
 
 ```console
-$ npm i @i-xi-dev/ms932-encoder@2.1.3
+$ npm i @i-xi-dev/ms932-encoder@2.1.7
 ```
 
 ```javascript
@@ -40,12 +40,12 @@ import { Ms932 } from "@i-xi-dev/ms932-encoder";
 Example for UNPKG
 
 ```javascript
-import { Ms932 } from "https://www.unpkg.com/@i-xi-dev/ms932-encoder@2.1.3/esm/mod.js";
+import { Ms932 } from "https://www.unpkg.com/@i-xi-dev/ms932-encoder@2.1.7/esm/mod.js";
 ```
 
 ## Usage
 
-### [`Ms932.Encoder`](https://doc.deno.land/https://raw.githubusercontent.com/i-xi-dev/ms932-encoder.es/2.1.3/mod.ts/~/Ms932.Encoder) class
+### [`Ms932.Encoder`](https://doc.deno.land/https://raw.githubusercontent.com/i-xi-dev/ms932-encoder.es/2.1.7/mod.ts/~/Ms932.Encoder) class
 
 The `Ms932.Encoder` implements the
 [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder)
@@ -87,7 +87,7 @@ encoder.encode("𩸽");
 // → throws TypeError.
 ```
 
-### [`Ms932.EncoderStream`](https://doc.deno.land/https://raw.githubusercontent.com/i-xi-dev/ms932-encoder.es/2.1.3/mod.ts/~/Ms932.EncoderStream) class
+### [`Ms932.EncoderStream`](https://doc.deno.land/https://raw.githubusercontent.com/i-xi-dev/ms932-encoder.es/2.1.7/mod.ts/~/Ms932.EncoderStream) class
 
 The `Ms932.EncoderStream` implements
 [`TextEncoderStream`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream)
