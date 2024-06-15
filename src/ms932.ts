@@ -1,7 +1,7 @@
 import {
   _TransformStream,
   CodePoint,
-  Rune,
+  RuneString,
   StringEx,
   TextEncoding,
   Uint8,
@@ -57,7 +57,7 @@ const _DEFAULT_REPLACEMENT_BYTES: _RuneBytes = [0x3F]; // "?"
 
 function _getReplacement(
   replacementRune: unknown,
-): { rune: Rune; bytes: _RuneBytes } {
+): { rune: RuneString; bytes: _RuneBytes } {
   if (StringEx.isString(replacementRune) && (replacementRune.length === 1)) {
     try {
       const tmp = new ArrayBuffer(_MAX_BYTES_PER_RUNE);

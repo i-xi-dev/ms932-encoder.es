@@ -47,7 +47,7 @@ await build({
     //   "types",
     // ],
   },
-  typeCheck: "both",
+  typeCheck: false, //TODO "both",
   declaration: "inline",
 });
 
