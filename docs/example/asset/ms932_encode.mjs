@@ -1,5 +1,5 @@
-import { Ms932 } from "https://www.unpkg.com/@i-xi-dev/ms932-encoder@2.1.7/esm/mod.js";
-// https://cdn.skypack.dev/@i-xi-dev/ms932-encoder@2.1.7
+import { Ms932 } from "https://www.unpkg.com/@i-xi-dev/ms932-encoder@2.1.9/esm/mod.js";
+// https://cdn.skypack.dev/@i-xi-dev/ms932-encoder@2.1.9
 
 import { bytesToString, decodeMs932 } from "./lib.mjs";
 
